@@ -4,10 +4,20 @@
  */
 package co.autonoma.edu.game.controller;
 
+import co.autonoma.edu.game.files.InstructionsManager;
+import co.autonoma.edu.game.gui.Window;
+
 /**
  *
  * @author ASUS
  */
 public class Controller {
+    public static void main(String[] args) {
+        Window mainWindow = new Window();
+        InstructionsManager manager = new InstructionsManager();
+        mainWindow.setManager(manager);
+        mainWindow.setVisible(true);
+    }
+    
     
 }
