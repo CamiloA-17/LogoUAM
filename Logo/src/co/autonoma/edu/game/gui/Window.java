@@ -5,6 +5,9 @@
 package co.autonoma.edu.game.gui;
 
 import co.autonoma.edu.game.files.InstructionsManager;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -17,8 +20,13 @@ public class Window extends javax.swing.JFrame {
      */
     public Window() {
         initComponents();
-        setLocationRelativeTo(null);
         setTitle("Logo UAM");
+        setResizable(false);
+        setLocationRelativeTo(this);
+        TurtleWindow turtleWindow = new TurtleWindow();
+        turtleWindow.setBounds(25, 80, 800, 500);
+        turtleWindow.setBorder(new BevelBorder(BevelBorder.RAISED));
+        add(turtleWindow);
     }
 
     public void setManager(InstructionsManager manager) {
@@ -34,17 +42,79 @@ public class Window extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtPrompt = new javax.swing.JTextField();
+        btnAccept = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listInstructions = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1200, 800));
+
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitle.setText("Logo UAM");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Prompt:");
+
+        txtPrompt.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtPrompt.setText("jTextField1");
+
+        btnAccept.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAccept.setText("Accept");
+
+        listInstructions.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listInstructions);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Instructions list");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPrompt, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(289, 289, 289)
+                        .addComponent(jLabel2)
+                        .addGap(117, 117, 117))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitle)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAccept, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(txtPrompt))
+                .addGap(57, 57, 57))
         );
 
         pack();
@@ -56,5 +126,12 @@ public class Window extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAccept;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JList<String> listInstructions;
+    private javax.swing.JTextField txtPrompt;
     // End of variables declaration//GEN-END:variables
 }
