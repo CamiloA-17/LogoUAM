@@ -26,7 +26,7 @@ public class Window extends javax.swing.JFrame {
         TurtleWindow turtleWindow = new TurtleWindow();
         turtleWindow.setBounds(25, 80, 800, 500);
         turtleWindow.setBorder(new BevelBorder(BevelBorder.RAISED));
-        add(turtleWindow);
+        add(turtleWindow);  
     }
 
     public void setManager(InstructionsManager manager) {
@@ -86,9 +86,9 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(512, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblTitle)
