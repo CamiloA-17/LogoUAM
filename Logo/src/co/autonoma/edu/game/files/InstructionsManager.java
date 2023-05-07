@@ -9,5 +9,5 @@ package co.autonoma.edu.game.files;
  * @author ASUS
  */
 public class InstructionsManager {
-    private FileReader reader;
+    private DocumentReader reader;
 }

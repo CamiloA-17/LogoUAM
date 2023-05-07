@@ -4,6 +4,7 @@
  */
 package co.autonoma.edu.game.controller;
 
+import co.autonoma.edu.game.files.DocumentReader;
 import co.autonoma.edu.game.files.InstructionsManager;
 import co.autonoma.edu.game.gui.Window;
 
@@ -15,6 +16,8 @@ public class Controller {
     public static void main(String[] args) {
         Window mainWindow = new Window();
         InstructionsManager manager = new InstructionsManager();
+        DocumentReader reader = new DocumentReader();
+        reader.readFile("Quepeña.txt");
         mainWindow.setManager(manager);
         mainWindow.setVisible(true);
     }
