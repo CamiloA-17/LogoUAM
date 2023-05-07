@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ASUS/Mi%20unidad/UAM/POO/ProjectLogo/Logo/src/co/autonoma/edu/game/controller/Controller.java</file>
-            <file>file:/C:/Users/ASUS/Mi%20unidad/UAM/POO/ProjectLogo/Logo/src/co/autonoma/edu/game/elements/Turtle.java</file>
-            <file>file:/C:/Users/ASUS/Mi%20unidad/UAM/POO/ProjectLogo/Logo/src/co/autonoma/edu/game/gui/Window.java</file>
-            <file>file:/C:/Users/ASUS/Mi%20unidad/UAM/POO/ProjectLogo/Logo/src/co/autonoma/edu/game/gui/TurtleWindow.java</file>
-            <file>file:/C:/Users/ASUS/Mi%20unidad/UAM/POO/ProjectLogo/Logo/src/co/autonoma/edu/game/files/InstructionsManager.java</file>
-            <file>file:/C:/Users/ASUS/Mi%20unidad/UAM/POO/ProjectLogo/Logo/src/co/autonoma/edu/game/files/FileReader.java</file>
+            <file>file:/C:/Users/izibr/OneDrive/Escritorio/Universidad/ProOri/ProjectLogo/LogoUAM/Logo/src/co/autonoma/edu/game/gui/Window.java</file>
+            <file>file:/C:/Users/izibr/OneDrive/Escritorio/Universidad/ProOri/ProjectLogo/LogoUAM/Logo/src/co/autonoma/edu/game/files/DocumentReader.java</file>
+            <file>file:/C:/Users/izibr/OneDrive/Escritorio/Universidad/ProOri/ProjectLogo/LogoUAM/Logo/src/co/autonoma/edu/game/elements/Turtle.java</file>
+            <file>file:/C:/Users/izibr/OneDrive/Escritorio/Universidad/ProOri/ProjectLogo/LogoUAM/Logo/src/co/autonoma/edu/game/files/InstructionsManager.java</file>
+            <file>file:/C:/Users/izibr/OneDrive/Escritorio/Universidad/ProOri/ProjectLogo/LogoUAM/Logo/src/co/autonoma/edu/game/gui/TurtleWindow.java</file>
+            <file>file:/C:/Users/izibr/OneDrive/Escritorio/Universidad/ProOri/ProjectLogo/LogoUAM/Logo/src/co/autonoma/edu/game/controller/Controller.java</file>
         </group>
     </open-files>
 </project-private>
