@@ -4,10 +4,23 @@
  */
 package co.autonoma.edu.game.files;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ASUS
  */
 public class InstructionsManager {
     private DocumentReader reader;
+
+    public InstructionsManager() {
+        this.reader = new DocumentReader();
+    }
+    
+    
+    public void searchFile(){
+        reader.searchFile();
+    }
+    
+      
 }

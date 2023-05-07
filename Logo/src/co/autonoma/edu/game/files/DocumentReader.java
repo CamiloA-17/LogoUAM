@@ -46,7 +46,7 @@ public class DocumentReader extends JFrame{
         
     }
     
-    public void readFile(String file){
+    public ArrayList readFile(String file){
         ArrayList<String> content= new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
@@ -56,11 +56,12 @@ public class DocumentReader extends JFrame{
         } catch (IOException e) {
             System.out.println("No se ha podido leer el archivo" + e.getMessage());
         }
+        return content;
     }
     
-    public void writeFile(ArrayList<String> Instructions, String file) throws IOException{
+    public void writeFile(ArrayList<String> instructions, String file) throws IOException{
         try (FileWriter writer = new FileWriter(file)) {
-            for(String line: Instructions){
+            for(String line: instructions){
                 writer.write(line + "\n");
             }
         }

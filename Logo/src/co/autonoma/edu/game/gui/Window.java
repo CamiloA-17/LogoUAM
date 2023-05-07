@@ -64,6 +64,11 @@ public class Window extends javax.swing.JFrame {
 
         btnAccept.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
 
         listInstructions.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -119,6 +124,10 @@ public class Window extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        manager.searchFile();
+    }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**
      * @param args the command line arguments
