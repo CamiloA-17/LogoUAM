@@ -4,6 +4,8 @@
  */
 package co.autonoma.edu.game.files;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ASUS
@@ -11,6 +13,17 @@ package co.autonoma.edu.game.files;
 public class InstructionsManager {
 
     private DocumentReader reader;
+
+    public InstructionsManager() {
+        this.reader = new DocumentReader();
+    }
+    
+    
+    public void searchFile(){
+        reader.searchFile();
+    }
+    
+      
 
     public void handleInstruction(String instruction) throws NumberFormatException {
         String command = instruction.split(" ")[0].toUpperCase();
