@@ -4,6 +4,7 @@
  */
 package co.autonoma.edu.game.files;
 
+import co.autonoma.edu.co.game.interfaces.Drawable;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -14,6 +15,7 @@ import javax.swing.DefaultListModel;
 public class InstructionsManager {
 
     private DocumentReader reader;
+    private Drawable drawable; //Test
 
     public InstructionsManager() {
         this.reader = new DocumentReader();
@@ -42,11 +44,11 @@ public class InstructionsManager {
         } else if (command.equals("H") || command.equals("HOME")) {
             home();
         } else if (command.equals("L") || command.equals("LOAD")) {
-            loadFile(parameter);
+            readFile();
         } else if (command.equals("S") || command.equals("SAVE")) {
             saveFile(parameter);
         } else {
-            // throw exception -> Instrucción inválida
+            System.out.println("INSTRUCCIÓN INVALIDA " + command);
         }
     }
 
@@ -62,6 +64,7 @@ public class InstructionsManager {
         for(String instruction: instructions){
             list.addElement(instruction);
         }
+        drawable.fillList(list);
     }
     
     public void readFile(){
@@ -126,5 +129,10 @@ public class InstructionsManager {
 
     public void home() {
 
+    }
+    
+    
+    public void setDrawable(Drawable drawable){
+        this.drawable = drawable;
     }
 }

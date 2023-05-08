@@ -14,18 +14,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author ASUS
  */
-public class DocumentReader extends JFrame{
+public class DocumentReader extends JFrame {
+
     private File file;
 
-    public DocumentReader(){
+    public DocumentReader() {
         this.file = file;
     }
-    
+
     public String searchFile() {
-        File fileName= null;
+        File fileName = null;
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("TXT files", "txt");    
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("TXT files", "txt");
         fileChooser.setFileFilter(imgFilter);
         int result = fileChooser.showOpenDialog(this);
         if (result != JFileChooser.CANCEL_OPTION) {
@@ -35,31 +36,31 @@ public class DocumentReader extends JFrame{
         return null;
     }
 
-    public String searchFile(File fileName){
-        String desktopPath= "C:\\Users\\ASUS\\Escritorio\\"+fileName+".txt";
-        if (file.exists()){
-            return fileName.getPath();
+    public String searchFile(File fileName) {
+        String desktopPath = "C:\\Users\\izibr\\OneDrive\\Escritorio" + fileName + ".txt";
+        if (file.exists()) {
+            return desktopPath;
         }
         return null;
     }
-    
-    public void createFile(String fileName, ArrayList<String> Instructions){
+
+    public void createFile(String fileName, ArrayList<String> Instructions) {
         File file = new File(fileName);
-        try{
+        try {
             file.createNewFile();
             writeFile(Instructions, fileName);
         } catch (IOException e) {
             System.out.println("No se ha podido crear el archivo" + e.getMessage());
         }
-        
+
     }
-    
-    public ArrayList readFile(){
+
+    public ArrayList readFile() {
         String file = searchFile();
-        ArrayList<String> content= new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+        ArrayList<String> content = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 content.add(line);
             }
         } catch (IOException e) {
@@ -67,10 +68,10 @@ public class DocumentReader extends JFrame{
         }
         return content;
     }
-    
-    public void writeFile(ArrayList<String> instructions, String file) throws IOException{
+
+    public void writeFile(ArrayList<String> instructions, String file) throws IOException {
         try (FileWriter writer = new FileWriter(file)) {
-            for(String line: instructions){
+            for (String line : instructions) {
                 writer.write(line + "\n");
             }
         }

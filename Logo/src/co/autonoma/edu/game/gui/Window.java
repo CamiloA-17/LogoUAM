@@ -4,8 +4,10 @@
  */
 package co.autonoma.edu.game.gui;
 
+import co.autonoma.edu.co.game.interfaces.Drawable;
 import co.autonoma.edu.game.files.InstructionsManager;
 import java.awt.Color;
+import javax.swing.DefaultListModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
@@ -13,8 +15,9 @@ import javax.swing.border.LineBorder;
  *
  * @author izibr
  */
-public class Window extends javax.swing.JFrame {
+public class Window extends javax.swing.JFrame implements Drawable{
     InstructionsManager manager;
+    TurtleWindow turtleWindow;
     /**
      * Creates new form Window
      */
@@ -23,7 +26,7 @@ public class Window extends javax.swing.JFrame {
         setTitle("Logo UAM");
         setResizable(false);
         setLocationRelativeTo(this);
-        TurtleWindow turtleWindow = new TurtleWindow();
+        turtleWindow = new TurtleWindow();
         turtleWindow.setBounds(25, 80, 800, 500);
         turtleWindow.setBorder(new BevelBorder(BevelBorder.RAISED));
         add(turtleWindow);  
@@ -31,6 +34,7 @@ public class Window extends javax.swing.JFrame {
 
     public void setManager(InstructionsManager manager) {
         this.manager = manager;
+        this.manager.setDrawable(this);
     }
 
     /**
@@ -126,7 +130,7 @@ public class Window extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        manager.searchFile();
+        manager.handleInstruction(this.txtPrompt.getText() + " TEST");
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**
@@ -143,4 +147,14 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JList<String> listInstructions;
     private javax.swing.JTextField txtPrompt;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void redraw() {
+        this.turtleWindow.repaint();
+    }
+
+    @Override
+    public void fillList(DefaultListModel data) {
+        this.listInstructions.setModel(data);
+    }
 }
