@@ -17,7 +17,7 @@ public class Controller {
         Window mainWindow = new Window();
         InstructionsManager manager = new InstructionsManager();
         DocumentReader reader = new DocumentReader();
-        String file= reader.searchFile();
+        // String file= reader.searchFile();
         System.out.println(reader.readFile());
         mainWindow.setManager(manager);
         mainWindow.setVisible(true);
