@@ -26,8 +26,8 @@ public class DocumentReader extends JFrame {
         File fileName = null;
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("TXT files", "txt");
-        fileChooser.setFileFilter(imgFilter);
+        FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("TXT files", "txt");
+        fileChooser.setFileFilter(txtFilter);
         int result = fileChooser.showOpenDialog(this);
         if (result != JFileChooser.CANCEL_OPTION) {
             fileName = fileChooser.getSelectedFile();
@@ -43,16 +43,29 @@ public class DocumentReader extends JFrame {
         }
         return null;
     }
+    
+    public String selectPath(){
+        JFileChooser fileChooser= new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("TXT files", "txt");
+        fileChooser.setFileFilter(txtFilter);
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION){
+            return fileChooser.getSelectedFile().getPath();
+        }
+        return null;
+    }
 
-    public void createFile(String fileName, ArrayList<String> Instructions) {
-        File file = new File(fileName);
+    public void createFile(String fileName,ArrayList<String> Instructions) {
+        String filePath= selectPath();
+        File file = new File(filePath + fileName + ".txt");
         try {
             file.createNewFile();
-            writeFile(Instructions, fileName);
+            writeFile(Instructions, filePath);
+            System.out.println("El archivo se ha creado con exito en: " + filePath);
         } catch (IOException e) {
             System.out.println("No se ha podido crear el archivo" + e.getMessage());
         }
-
     }
 
     public ArrayList readFile() {

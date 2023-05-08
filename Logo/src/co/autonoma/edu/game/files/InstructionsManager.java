@@ -34,6 +34,7 @@ public class InstructionsManager implements Drawable{
     public void handleInstruction(String instruction) {
         String command = instruction.split(" ")[0].toUpperCase();
         String parameter = instruction.split(" ")[1]; // Esta línea puede tirar errores
+        ArrayList<String> instructions = new ArrayList<>();
         if (command.equals("FD") || command.equals("FORWARD")
                 || command.equals("BD") || command.equals("BACKWARD")
                 || command.equals("RT") || command.equals("RIGHTTURN")
@@ -47,10 +48,11 @@ public class InstructionsManager implements Drawable{
         } else if (command.equals("L") || command.equals("LOAD")) {
             readFile();
         } else if (command.equals("S") || command.equals("SAVE")) {
-            saveFile(parameter);
+            saveFile(parameter, instructions);
         } else {
             System.out.println("INSTRUCCIÓN INVALIDA " + command);
         }
+        instructions.add(instruction);
     }
 
     public void validateInstructions(ArrayList<String> validateInstructions) {
@@ -73,8 +75,8 @@ public class InstructionsManager implements Drawable{
         validateInstructions(instructions);
     }
 
-    public void saveFile(String fileName) {
-
+    public void saveFile(String fileName, ArrayList<String> instructions) {
+        reader.createFile(fileName, instructions);
     }
 
     public void setColor(String color) {
