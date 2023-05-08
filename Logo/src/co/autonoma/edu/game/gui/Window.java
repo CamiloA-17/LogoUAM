@@ -16,8 +16,8 @@ import javax.swing.border.LineBorder;
  * @author izibr
  */
 public class Window extends javax.swing.JFrame implements Drawable{
-    InstructionsManager manager;
-    TurtleWindow turtleWindow;
+    private InstructionsManager manager;
+    private TurtleWindow turtleWindow;
     /**
      * Creates new form Window
      */
@@ -26,7 +26,7 @@ public class Window extends javax.swing.JFrame implements Drawable{
         setTitle("Logo UAM");
         setResizable(false);
         setLocationRelativeTo(this);
-        turtleWindow = new TurtleWindow();
+        turtleWindow = new TurtleWindow(this);
         turtleWindow.setBounds(25, 80, 800, 500);
         turtleWindow.setBorder(new BevelBorder(BevelBorder.RAISED));
         add(turtleWindow);  
@@ -35,6 +35,10 @@ public class Window extends javax.swing.JFrame implements Drawable{
     public void setManager(InstructionsManager manager) {
         this.manager = manager;
         this.manager.setDrawable(this);
+    }
+    
+    public InstructionsManager getManager(){
+        return manager;
     }
 
     /**
@@ -150,7 +154,7 @@ public class Window extends javax.swing.JFrame implements Drawable{
 
     @Override
     public void redraw() {
-        this.turtleWindow.repaint();
+        this.turtleWindow.redraw();
     }
 
     @Override

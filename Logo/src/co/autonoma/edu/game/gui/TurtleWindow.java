@@ -6,22 +6,24 @@ package co.autonoma.edu.game.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.border.BevelBorder;
 
 /**
  *
  * @author ASUS
  */
 public class TurtleWindow extends javax.swing.JPanel {
-
-    public TurtleWindow() {
+    Window parentElement;
+    public TurtleWindow(Window parent) {
         initComponents();
+        parentElement = parent;
     }
 
     @Override
     public void paint(Graphics g) {
+        super.paint(g);
         g.setColor(Color.red);
         g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
+        parentElement.getManager().draw(g);
     }
     
     
@@ -48,7 +50,9 @@ public class TurtleWindow extends javax.swing.JPanel {
             .addGap(0, 296, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    public void redraw(){
+        repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

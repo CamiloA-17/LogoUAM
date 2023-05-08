@@ -5,6 +5,9 @@
 package co.autonoma.edu.game.files;
 
 import co.autonoma.edu.co.game.interfaces.Drawable;
+import co.autonoma.edu.game.elements.Turtle;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -12,33 +15,31 @@ import javax.swing.DefaultListModel;
  *
  * @author ASUS
  */
-public class InstructionsManager {
+public class InstructionsManager implements Drawable{
 
     private DocumentReader reader;
+    private Turtle turtle;
     private Drawable drawable; //Test
 
     public InstructionsManager() {
         this.reader = new DocumentReader();
+        this.turtle = new Turtle(100, 100, 20, 50, 0, Color.BLACK);
+        this.turtle.setDrawable(this);
     }
-    
-    
-    public void searchFile(){
+
+    public void searchFile() {
         reader.searchFile();
     }
-    
-    public void handleInstruction(String instruction) throws NumberFormatException {
+
+    public void handleInstruction(String instruction) {
         String command = instruction.split(" ")[0].toUpperCase();
         String parameter = instruction.split(" ")[1]; // Esta línea puede tirar errores
         if (command.equals("FD") || command.equals("FORWARD")
-                || command.equals("BD") || command.equals("BACKWARD")) {
-            int value = Integer.parseInt(parameter);
-            move(command, value);
-        } else if (command.equals("RT") || command.equals("RIGHTTURN")
-                || command.equals("LT") || command.equals("LEFTTURN")) {
-            int value = Integer.parseInt(parameter);
-            turn(command, value);
-        } else if (command.equals("SC") || command.equals("SETCOLOR")) {
-            setColor(parameter);
+                || command.equals("BD") || command.equals("BACKWARD")
+                || command.equals("RT") || command.equals("RIGHTTURN")
+                || command.equals("LT") || command.equals("LEFTTURN")
+                || command.equals("SC") || command.equals("SETCOLOR")) {
+            turtle.handleInstruction(command, parameter);
         } else if (command.equals("R") || command.equals("RESET")) {
             reset();
         } else if (command.equals("H") || command.equals("HOME")) {
@@ -52,70 +53,27 @@ public class InstructionsManager {
         }
     }
 
-    public void validateInstructions(ArrayList<String> validateInstructions){
-        for(String validateInstruction: validateInstructions){
+    public void validateInstructions(ArrayList<String> validateInstructions) {
+        for (String validateInstruction : validateInstructions) {
             handleInstruction(validateInstruction);
         }
         shareInstructions(validateInstructions);
     }
-    
-    public void shareInstructions(ArrayList<String> instructions){
-        DefaultListModel list= new DefaultListModel();
-        for(String instruction: instructions){
+
+    public void shareInstructions(ArrayList<String> instructions) {
+        DefaultListModel list = new DefaultListModel();
+        for (String instruction : instructions) {
             list.addElement(instruction);
         }
         drawable.fillList(list);
     }
-    
-    public void readFile(){
+
+    public void readFile() {
         ArrayList<String> instructions = reader.readFile();
         validateInstructions(instructions);
     }
 
-    public void move(String command, int value) {
-        if (value > 0) {
-            if (command.equals("FD") || command.equals("FORWARD")) {
-                moveForward(value);
-            }
-            if (command.equals("BD") || command.equals("BACKWARD")) {
-                moveBackward(value);
-            }
-        }else{
-            //throw exception -> Valor menor a 0
-        }
-
-    }
-
-    public void turn(String command, int value) {
-        if (command.equals("RT") || command.equals("RIGHTTURN")) {
-            turnRight(value);
-        }
-        if (command.equals("LT") || command.equals("LEFTTURN")) {
-            turnLeft(value);
-        }
-    }
-
-    public void loadFile(String fileName) {
-        
-    }
-
     public void saveFile(String fileName) {
-
-    }
-
-    public void moveForward(int value) {
-
-    }
-
-    public void moveBackward(int value) {
-
-    }
-
-    public void turnRight(int value) {
-
-    }
-
-    public void turnLeft(int value) {
 
     }
 
@@ -130,9 +88,22 @@ public class InstructionsManager {
     public void home() {
 
     }
-    
-    
-    public void setDrawable(Drawable drawable){
+
+    public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
+    }
+    
+    public void draw(Graphics g){
+        turtle.draw(g);
+    }
+
+    @Override
+    public void redraw() {
+        this.drawable.redraw();
+    }
+
+    @Override
+    public void fillList(DefaultListModel data) {
+        
     }
 }
