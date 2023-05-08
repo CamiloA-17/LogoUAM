@@ -5,6 +5,7 @@
 package co.autonoma.edu.game.files;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -23,8 +24,6 @@ public class InstructionsManager {
         reader.searchFile();
     }
     
-      
-
     public void handleInstruction(String instruction) throws NumberFormatException {
         String command = instruction.split(" ")[0].toUpperCase();
         String parameter = instruction.split(" ")[1]; // Esta línea puede tirar errores
@@ -49,7 +48,25 @@ public class InstructionsManager {
         } else {
             // throw exception -> Instrucción inválida
         }
+    }
 
+    public void validateInstructions(ArrayList<String> validateInstructions){
+        for(String validateInstruction: validateInstructions){
+            handleInstruction(validateInstruction);
+        }
+        shareInstructions(validateInstructions);
+    }
+    
+    public void shareInstructions(ArrayList<String> instructions){
+        DefaultListModel list= new DefaultListModel();
+        for(String instruction: instructions){
+            list.addElement(instruction);
+        }
+    }
+    
+    public void readFile(){
+        ArrayList<String> instructions = reader.readFile();
+        validateInstructions(instructions);
     }
 
     public void move(String command, int value) {

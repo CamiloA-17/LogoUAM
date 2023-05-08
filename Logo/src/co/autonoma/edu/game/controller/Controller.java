@@ -7,7 +7,6 @@ package co.autonoma.edu.game.controller;
 import co.autonoma.edu.game.files.DocumentReader;
 import co.autonoma.edu.game.files.InstructionsManager;
 import co.autonoma.edu.game.gui.Window;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +17,8 @@ public class Controller {
         Window mainWindow = new Window();
         InstructionsManager manager = new InstructionsManager();
         DocumentReader reader = new DocumentReader();
+        String file= reader.searchFile();
+        System.out.println(reader.readFile());
         mainWindow.setManager(manager);
         mainWindow.setVisible(true);
     }

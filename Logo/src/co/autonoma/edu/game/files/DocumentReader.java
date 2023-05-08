@@ -34,6 +34,14 @@ public class DocumentReader extends JFrame{
         }
         return null;
     }
+
+    public String searchFile(File fileName){
+        String desktopPath= "C:\\Users\\ASUS\\Escritorio\\"+fileName+".txt";
+        if (file.exists()){
+            return fileName.getPath();
+        }
+        return null;
+    }
     
     public void createFile(String fileName, ArrayList<String> Instructions){
         File file = new File(fileName);
@@ -46,7 +54,8 @@ public class DocumentReader extends JFrame{
         
     }
     
-    public ArrayList readFile(String file){
+    public ArrayList readFile(){
+        String file = searchFile();
         ArrayList<String> content= new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
