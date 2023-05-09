@@ -68,7 +68,6 @@ public class Window extends javax.swing.JFrame implements Drawable{
         jLabel1.setText("Prompt:");
 
         txtPrompt.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        txtPrompt.setText("jTextField1");
 
         btnAccept.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnAccept.setText("Accept");
@@ -78,11 +77,6 @@ public class Window extends javax.swing.JFrame implements Drawable{
             }
         });
 
-        listInstructions.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listInstructions);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -134,7 +128,7 @@ public class Window extends javax.swing.JFrame implements Drawable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        manager.handleInstruction(this.txtPrompt.getText() + " TEST");
+        manager.handleInstruction(this.txtPrompt.getText());
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**

@@ -15,9 +15,10 @@ import javax.swing.DefaultListModel;
  *
  * @author ASUS
  */
-public class InstructionsManager implements Drawable{
+public class InstructionsManager implements Drawable {
 
     private DocumentReader reader;
+    private ArrayList<String> instructions = new ArrayList<>();
     private Turtle turtle;
     private Drawable drawable; //Test
 
@@ -32,37 +33,42 @@ public class InstructionsManager implements Drawable{
     }
 
     public void handleInstruction(String instruction) {
-        String command = instruction.split(" ")[0].toUpperCase();
-        String parameter = instruction.split(" ")[1]; // Esta línea puede tirar errores
-        ArrayList<String> instructions = new ArrayList<>();
-        if (command.equals("FD") || command.equals("FORWARD")
-                || command.equals("BD") || command.equals("BACKWARD")
-                || command.equals("RT") || command.equals("RIGHTTURN")
-                || command.equals("LT") || command.equals("LEFTTURN")
-                || command.equals("SC") || command.equals("SETCOLOR")) {
-            turtle.handleInstruction(command, parameter);
-        } else if (command.equals("R") || command.equals("RESET")) {
-            reset();
-        } else if (command.equals("H") || command.equals("HOME")) {
-            home();
-        } else if (command.equals("L") || command.equals("LOAD")) {
-            readFile();
-        } else if (command.equals("S") || command.equals("SAVE")) {
-            saveFile(parameter, instructions);
-        } else {
-            System.out.println("INSTRUCCIÓN INVALIDA " + command);
+        if (instruction.length() > 0) {
+            String command = instruction.split(" ")[0].toUpperCase();
+            String parameter = instruction.split(" ")[1]; // Esta línea puede tirar errores
+            if (command.equals("FD") || command.equals("FORWARD")
+                    || command.equals("BD") || command.equals("BACKWARD")
+                    || command.equals("RT") || command.equals("RIGHTTURN")
+                    || command.equals("LT") || command.equals("LEFTTURN")
+                    || command.equals("SC") || command.equals("SETCOLOR")) {
+                turtle.handleInstruction(command, parameter);
+            } else if (command.equals("R") || command.equals("RESET")) {
+                reset();
+            } else if (command.equals("H") || command.equals("HOME")) {
+                home();
+            } else if (command.equals("L") || command.equals("LOAD")) {
+                readFile();
+            } else if (command.equals("S") || command.equals("SAVE")) {
+                saveFile(parameter, instructions);
+            } else {
+                System.out.println("INSTRUCCIÓN NO DISPONBLE" + command);
+            }
+            instructions.add(instruction);
+            shareInstructions();
+        }else{
+            System.out.println("INSTRUCCIÓN VACÍA");
         }
-        instructions.add(instruction);
     }
 
     public void validateInstructions(ArrayList<String> validateInstructions) {
         for (String validateInstruction : validateInstructions) {
             handleInstruction(validateInstruction);
         }
-        shareInstructions(validateInstructions);
+        this.instructions = validateInstructions;
+        shareInstructions();
     }
 
-    public void shareInstructions(ArrayList<String> instructions) {
+    public void shareInstructions() {
         DefaultListModel list = new DefaultListModel();
         for (String instruction : instructions) {
             list.addElement(instruction);
@@ -94,8 +100,8 @@ public class InstructionsManager implements Drawable{
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
     }
-    
-    public void draw(Graphics g){
+
+    public void draw(Graphics g) {
         turtle.draw(g);
     }
 
@@ -106,6 +112,6 @@ public class InstructionsManager implements Drawable{
 
     @Override
     public void fillList(DefaultListModel data) {
-        
+
     }
 }
