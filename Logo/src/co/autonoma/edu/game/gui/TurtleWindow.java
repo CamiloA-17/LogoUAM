@@ -23,7 +23,7 @@ public class TurtleWindow extends javax.swing.JPanel {
         super.paint(g);
         g.setColor(Color.red);
         g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
-        parentElement.getManager().draw(g);
+        //parentElement.getManager().draw(g);
     }
     
     

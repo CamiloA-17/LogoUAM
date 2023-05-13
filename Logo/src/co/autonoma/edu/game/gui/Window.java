@@ -4,7 +4,8 @@
  */
 package co.autonoma.edu.game.gui;
 
-import co.autonoma.edu.co.game.interfaces.Drawable;
+import co.autonoma.edu.game.elements.Interpreter;
+import co.autonoma.edu.game.interfaces.Drawable;
 import co.autonoma.edu.game.files.InstructionsManager;
 import java.awt.Color;
 import javax.swing.DefaultListModel;
@@ -16,7 +17,7 @@ import javax.swing.border.LineBorder;
  * @author izibr
  */
 public class Window extends javax.swing.JFrame implements Drawable{
-    private InstructionsManager manager;
+    private Interpreter interpreter;
     private TurtleWindow turtleWindow;
     /**
      * Creates new form Window
@@ -32,15 +33,11 @@ public class Window extends javax.swing.JFrame implements Drawable{
         add(turtleWindow);  
     }
 
-    public void setManager(InstructionsManager manager) {
-        this.manager = manager;
-        this.manager.setDrawable(this);
+    public void setInterpreter(Interpreter interpreter) {
+        this.interpreter = interpreter;
+        //this.interpreter.setDrawable(this);
     }
-    
-    public InstructionsManager getManager(){
-        return manager;
-    }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,7 +125,7 @@ public class Window extends javax.swing.JFrame implements Drawable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        manager.handleInstruction(this.txtPrompt.getText());
+        //manager.handleInstruction(this.txtPrompt.getText());
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**

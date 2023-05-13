@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package co.autonoma.edu.game.controller;
+import co.autonoma.edu.game.elements.Interpreter;
 import co.autonoma.edu.game.files.InstructionsManager;
 import co.autonoma.edu.game.gui.Window;
 
@@ -13,11 +14,8 @@ import co.autonoma.edu.game.gui.Window;
 public class Controller {
     public static void main(String[] args) {
         Window mainWindow = new Window();
-        InstructionsManager manager = new InstructionsManager();
-        //DocumentReader reader = new DocumentReader();
-        //String file= reader.searchFile();
-        //System.out.println(reader.readFile());
-        mainWindow.setManager(manager);
+        Interpreter interpreter = new Interpreter();
+        mainWindow.setInterpreter(interpreter);
         mainWindow.setVisible(true);
     }
     

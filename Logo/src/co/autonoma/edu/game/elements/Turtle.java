@@ -4,7 +4,7 @@
  */
 package co.autonoma.edu.game.elements;
 
-import co.autonoma.edu.co.game.interfaces.Drawable;
+import co.autonoma.edu.game.interfaces.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
