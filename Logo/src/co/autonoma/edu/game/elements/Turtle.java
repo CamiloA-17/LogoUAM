@@ -53,7 +53,6 @@ public class Turtle extends Sprite{
     }
     
     public void move(Instruction instruction){
-        System.out.println("Se intenta mover");
         double aux_x = x;
         double aux_y = y;
         if (instruction instanceof ForwardInstruction) {

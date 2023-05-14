@@ -4,7 +4,7 @@
  */
 package co.autonoma.edu.game.elements;
 
-import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+import co.autonoma.edu.game.exceptions.*;
 import co.autonoma.edu.game.instructions.*;
 import java.util.LinkedList;
 import java.util.regex.PatternSyntaxException;
@@ -20,12 +20,12 @@ public class Program {
     public Program() {
         instructions = new LinkedList<>();
     }
-
+    
     public Instruction handleInstruction(String instruction) {
         if (instruction.length() > 0) {
             String command = instruction.split(" ")[0].toUpperCase();
             if (command.equals("FD") || command.equals("FORWARD")) {
-                return addForwardInstruction(instruction);
+                return addForwardInstruction(instruction); // -> throws exceptions
             } else if (command.equals("BD") || command.equals("BACKWARD")) {
                 
             } else if (command.equals("RT") || command.equals("RIGHTTURN")) {
@@ -43,12 +43,10 @@ public class Program {
             } else if (command.equals("S") || command.equals("SAVE")) {
                 
             } else {
-                System.out.println("INSTRUCCIÓN NO DISPONBLE" + command); // throw exception
+                throw new NotAvailableInstructionException(instruction); // throw exception
             }
-            //instructions.add(instruction);
-            //shareInstructions();
         } else {
-            System.out.println("INSTRUCCIÓN VACÍA"); //throw exception
+            throw new VoidInstructionException(); //throw exception
         }
         return null;
     }
