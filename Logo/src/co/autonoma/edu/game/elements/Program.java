@@ -4,8 +4,10 @@
  */
 package co.autonoma.edu.game.elements;
 
+import co.autonoma.edu.game.exceptions.NegativeDistanceException;
 import co.autonoma.edu.game.instructions.*;
 import java.util.LinkedList;
+import java.util.regex.PatternSyntaxException;
 
 /**
  *
@@ -19,11 +21,11 @@ public class Program {
         instructions = new LinkedList<>();
     }
 
-    public void handleInstruction(String instruction) {
+    public Instruction handleInstruction(String instruction) {
         if (instruction.length() > 0) {
             String command = instruction.split(" ")[0].toUpperCase();
             if (command.equals("FD") || command.equals("FORWARD")) {
-                addForwardInstruction(instruction);
+                return addForwardInstruction(instruction);
             } else if (command.equals("BD") || command.equals("BACKWARD")) {
                 
             } else if (command.equals("RT") || command.equals("RIGHTTURN")) {
@@ -48,10 +50,13 @@ public class Program {
         } else {
             System.out.println("INSTRUCCIÓN VACÍA"); //throw exception
         }
+        return null;
     }
     
-    public void addForwardInstruction(String instruction){
+    public Instruction addForwardInstruction(String instruction) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException{
         Instruction newInstruction = new ForwardInstruction();
         newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
     }
 }

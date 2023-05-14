@@ -24,7 +24,7 @@ public class InstructionsManager implements Drawable {
 
     public InstructionsManager() {
         this.reader = new DocumentReader();
-        this.turtle = new Turtle(100, 100, 20, 50, 0, Color.BLACK);
+        this.turtle = new Turtle(100, 100, 20, 50);
         this.turtle.setDrawable(this);
     }
 
@@ -41,7 +41,7 @@ public class InstructionsManager implements Drawable {
                     || command.equals("RT") || command.equals("RIGHTTURN")
                     || command.equals("LT") || command.equals("LEFTTURN")
                     || command.equals("SC") || command.equals("SETCOLOR")) {
-                turtle.handleInstruction(command, parameter);
+                //turtle.handleInstruction(command, parameter);
             } else if (command.equals("R") || command.equals("RESET")) {
                 reset();
             } else if (command.equals("H") || command.equals("HOME")) {
@@ -73,7 +73,7 @@ public class InstructionsManager implements Drawable {
         for (String instruction : instructions) {
             list.addElement(instruction);
         }
-        drawable.fillList(list);
+        //drawable.fillList(list);
     }
 
     public void readFile() {
@@ -108,10 +108,5 @@ public class InstructionsManager implements Drawable {
     @Override
     public void redraw() {
         this.drawable.redraw();
-    }
-
-    @Override
-    public void fillList(DefaultListModel data) {
-
     }
 }

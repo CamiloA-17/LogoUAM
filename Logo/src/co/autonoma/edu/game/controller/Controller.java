@@ -4,7 +4,6 @@
  */
 package co.autonoma.edu.game.controller;
 import co.autonoma.edu.game.elements.Interpreter;
-import co.autonoma.edu.game.files.InstructionsManager;
 import co.autonoma.edu.game.gui.Window;
 
 /**

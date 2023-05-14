@@ -4,12 +4,13 @@
  */
 package co.autonoma.edu.game.interfaces;
 
-import javax.swing.DefaultListModel;
-
 /**
  *
  * @author izibr
  */
-public interface Drawable {
-    public void redraw();
+public interface Dimensionable {
+    public int getX();
+    public int getY();
+    public int getWidth();
+    public int getHeight();
 }

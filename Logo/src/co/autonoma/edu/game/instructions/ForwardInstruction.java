@@ -5,6 +5,7 @@
 package co.autonoma.edu.game.instructions;
 
 import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+import java.util.regex.PatternSyntaxException;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ForwardInstruction extends Instruction {
     }
 
     @Override
-    public void setParameter(String parameter) throws NumberFormatException, NegativeDistanceException {
+    public void setParameter(String parameter) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException {
         int auxDistance = Integer.parseInt(parameter.split(" ")[1]);
         if (auxDistance >= 0) {
             this.distance = auxDistance;
@@ -28,4 +29,7 @@ public class ForwardInstruction extends Instruction {
         }
     }
 
+    public int getDistance() {
+        return distance;
+    }
 }

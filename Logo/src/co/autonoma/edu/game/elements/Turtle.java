@@ -4,6 +4,7 @@
  */
 package co.autonoma.edu.game.elements;
 
+import co.autonoma.edu.game.instructions.*;
 import co.autonoma.edu.game.interfaces.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,23 +15,15 @@ import java.util.ArrayList;
  *
  * @author ASUS
  */
-public class Turtle {
-
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+public class Turtle extends Sprite{
     private double angle;
     private Color pencilColor;
     private Drawable drawable;
-
-    public Turtle(int x, int y, int width, int height, double angle, Color pencilColor) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.angle = angle;
-        this.pencilColor = pencilColor;
+    
+    public Turtle(int x, int y, int width, int height){
+        super(x, y, width, height);
+        this.angle = 0;
+        this.pencilColor = Color.BLACK;
     }
 
     public void draw(Graphics g) {
@@ -41,34 +34,35 @@ public class Turtle {
         g2d.fillRect(0, 0, width, height);
     }
 
-    public void handleInstruction(String instruction, String parameter) throws NumberFormatException {
-        if (instruction.equals("SC") || instruction.equals("SETCOLOR")){
-            setColor(parameter);
-            drawable.redraw();
+    public void handleInstruction(Instruction instruction) throws NumberFormatException {
+        if (instruction instanceof SetColorInstruction){
+            //setColor((SetColorInstruction)instruction);
+            //drawable.redraw();
             return;
         }
-        int value = Integer.parseInt(parameter);
-        if (instruction.equals("FD") || instruction.equals("FORWARD")
-         || instruction.equals("BD") || instruction.equals("BACKWARD")) {
-            move(instruction, value);
+        if (instruction instanceof ForwardInstruction
+         || instruction instanceof BackwardInstruction) {
+            move(instruction);
             drawable.redraw();
         }
         if (instruction.equals("RT") || instruction.equals("RIGHTTURN") 
         || instruction.equals("LT") || instruction.equals("LEFTTURN")){
-            turn(instruction, value);
+            turn(instruction);
             drawable.redraw();
         }
     }
     
-    public void move(String direction, double value){
+    public void move(Instruction instruction){
         System.out.println("Se intenta mover");
         double aux_x = x;
         double aux_y = y;
-        if (direction.equals("FD") || direction.equals("FORWARD")) {
+        if (instruction instanceof ForwardInstruction) {
+            int value = ((ForwardInstruction)instruction).getDistance();
             aux_x = aux_x + (Math.sin(Math.toRadians(angle))*value);
             aux_y = aux_y - (Math.cos(Math.toRadians(angle))*value);
         }
-        if (direction.equals("BD") || direction.equals("BACKWARD")) {
+        if (instruction instanceof BackwardInstruction) {
+            int value = ((ForwardInstruction)instruction).getDistance();
             aux_x = aux_x - (Math.sin(Math.toRadians(angle))*value);
             aux_y = aux_y + (Math.cos(Math.toRadians(angle))*value);
         }
@@ -77,12 +71,12 @@ public class Turtle {
         y = (int)Math.round(aux_y);
     }
     
-    public void turn(String direction, int value){
-        if (direction.equals("RT") || direction.equals("RIGHTTURN")) {
-            angle += value;
+    public void turn(Instruction instruction){
+        if (instruction instanceof RightTurnInstruction) {
+            int value = ((ForwardInstruction)instruction).getDistance();
         }
-        if (direction.equals("LT") || direction.equals("LEFTTURN")) {
-            angle -= value;
+        if (instruction instanceof LeftTurnInstruction) {
+            int value = ((ForwardInstruction)instruction).getDistance();
         }
     }
     
