@@ -8,6 +8,8 @@ import co.autonoma.edu.game.elements.Interpreter;
 import javax.swing.DefaultListModel;
 import javax.swing.border.BevelBorder;
 import co.autonoma.edu.game.exceptions.*;
+import co.autonoma.edu.game.interfaces.Dimensionable;
+import java.awt.image.ImageObserver;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
 
@@ -15,13 +17,15 @@ import javax.swing.JOptionPane;
  *
  * @author izibr
  */
-public class Window extends javax.swing.JFrame{
+public class Window extends javax.swing.JFrame implements Dimensionable{
+
     private Interpreter interpreter;
     private TurtleWindow turtleWindow;
     private final int PANEL_X = 25;
     private final int PANEL_Y = 80;
     private final int PANEL_WIDTH = 800;
     private final int PANEL_HEIGHT = 500;
+
     /**
      * Creates new form Window
      */
@@ -42,12 +46,13 @@ public class Window extends javax.swing.JFrame{
         this.interpreter.setY(PANEL_Y);
         this.interpreter.setWidth(PANEL_WIDTH);
         this.interpreter.setHeight(PANEL_HEIGHT);
+        this.interpreter.setArea(this);
         this.interpreter.setInitialTurtleValues();
         this.interpreter.setDrawable(this.turtleWindow);
         turtleWindow.setInterpreter(this.interpreter);
         //this.interpreter.setDrawable(this);
     }
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -128,33 +133,34 @@ public class Window extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//throws NotAvailableInstructionException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, ParametersExceededException
+//throws NotAvailableInstructionException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, ParametersExceededException, NotAvailableColorException
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        try{
+        try {
             interpreter.handleInstruction(this.txtPrompt.getText());
-        }catch (NotAvailableInstructionException e1){
+        } catch (NotAvailableInstructionException e1) {
             JOptionPane.showMessageDialog(this, e1.getMessage());
-        }catch (VoidInstructionException e2){
+        } catch (VoidInstructionException e2) {
             JOptionPane.showMessageDialog(this, e2.getMessage());
-        }catch (NumberFormatException e3){
+        } catch (NumberFormatException e3) {
             JOptionPane.showMessageDialog(this, e3.getMessage());
-        }catch (ParametersExceededException e4){
+        } catch (ParametersExceededException e4) {
             JOptionPane.showMessageDialog(this, e4.getMessage());
-        }catch(NegativeDistanceException e5){
+        } catch (NegativeDistanceException e5) {
             JOptionPane.showMessageDialog(this, e5.getMessage());
-        }catch(PatternSyntaxException e6){
+        } catch (PatternSyntaxException e6) {
             JOptionPane.showMessageDialog(this, e6.getMessage());
-        }catch (NoParameterException e7){
+        } catch (NoParameterException e7) {
             JOptionPane.showMessageDialog(this, e7.getMessage());
+        } catch (NotAvailableColorException e8){
+            JOptionPane.showMessageDialog(this, e8.getMessage());
+        } catch (NegativeAngleException e9){
+            JOptionPane.showMessageDialog(this, e9.getMessage());
         }
-        
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
-   
-
+         * @param args the command line arguments
+         */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
     private javax.swing.JLabel jLabel1;
@@ -165,8 +171,13 @@ public class Window extends javax.swing.JFrame{
     private javax.swing.JTextField txtPrompt;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public ImageObserver getObserver() {
+        return turtleWindow;
+    }
+
     //@Override
     //public void fillList(DefaultListModel data) {
-        //this.listInstructions.setModel(data);
+    //this.listInstructions.setModel(data);
     //}
 }

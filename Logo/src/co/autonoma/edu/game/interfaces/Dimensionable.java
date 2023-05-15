@@ -4,6 +4,8 @@
  */
 package co.autonoma.edu.game.interfaces;
 
+import java.awt.image.ImageObserver;
+
 /**
  *
  * @author izibr
@@ -13,4 +15,5 @@ public interface Dimensionable {
     public int getY();
     public int getWidth();
     public int getHeight();
+    public ImageObserver getObserver();
 }

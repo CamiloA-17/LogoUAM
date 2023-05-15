@@ -9,89 +9,86 @@ import co.autonoma.edu.game.interfaces.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author ASUS
  */
-public class Turtle extends Sprite{
+public class Turtle extends Sprite {
+
     private double angle;
     private Color pencilColor;
     private Drawable drawable;
-    
-    public Turtle(int x, int y, int width, int height){
+    private LinkedList<Integer> xPoints;
+    private LinkedList<Integer> yPoints;
+    private ImageIcon image;
+
+    public Turtle(int x, int y, int width, int height) {
         super(x, y, width, height);
         this.angle = 0;
         this.pencilColor = Color.BLACK;
+        this.image = new ImageIcon("C:\\Users\\izibr\\OneDrive\\Escritorio\\Universidad\\ProOri\\ProjectLogo\\LogoUAM\\Logo\\src\\co\\autonoma\\edu\\game\\imgs\\turtle.png");
     }
 
     public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.translate(x, y);
-        g2d.rotate(Math.toRadians(angle));
+        Graphics2D g2d = (Graphics2D) g;
+        System.out.println(image.getIconHeight());
         g2d.setColor(pencilColor);
-        g2d.fillRect(0, 0, width, height);
+        g2d.drawPolyline(updateXPoints(), updateYPoints(), xPoints.size());
+        g2d.translate(x, y);
+        AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(angle), width / 2, height / 2);
+        g2d.drawImage(image.getImage(), tx, area.getObserver());
     }
 
     public void handleInstruction(Instruction instruction) throws NumberFormatException {
-        if (instruction instanceof SetColorInstruction){
-            //setColor((SetColorInstruction)instruction);
-            //drawable.redraw();
+        if (instruction instanceof SetColorInstruction) {
+            pencilColor = ((SetColorInstruction) instruction).getColor();
+            drawable.redraw();
             return;
         }
         if (instruction instanceof ForwardInstruction
-         || instruction instanceof BackwardInstruction) {
+                || instruction instanceof BackwardInstruction) {
             move(instruction);
             drawable.redraw();
         }
-        if (instruction instanceof RightTurnInstruction 
-        || instruction instanceof LeftTurnInstruction){
+        if (instruction instanceof RightTurnInstruction
+                || instruction instanceof LeftTurnInstruction) {
             turn(instruction);
             drawable.redraw();
         }
     }
-    
-    public void move(Instruction instruction){
+
+    public void move(Instruction instruction) {
         double aux_x = x;
         double aux_y = y;
         if (instruction instanceof ForwardInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
-            aux_x = aux_x + (Math.sin(Math.toRadians(angle))*value);
-            aux_y = aux_y - (Math.cos(Math.toRadians(angle))*value);
+            int value = ((ForwardInstruction) instruction).getDistance();
+            aux_x = aux_x + (Math.sin(Math.toRadians(angle)) * value);
+            aux_y = aux_y - (Math.cos(Math.toRadians(angle)) * value);
         }
         if (instruction instanceof BackwardInstruction) {
-            int value = ((BackwardInstruction)instruction).getDistance();
-            aux_x = aux_x - (Math.sin(Math.toRadians(angle))*value);
-            aux_y = aux_y + (Math.cos(Math.toRadians(angle))*value);
+            int value = ((BackwardInstruction) instruction).getDistance();
+            aux_x = aux_x - (Math.sin(Math.toRadians(angle)) * value);
+            aux_y = aux_y + (Math.cos(Math.toRadians(angle)) * value);
         }
-        
-        x = (int)Math.round(aux_x);
-        y = (int)Math.round(aux_y);
+
+        x = (int) Math.round(aux_x);
+        y = (int) Math.round(aux_y);
+        xPoints.add(x + width / 2);
+        yPoints.add(y + height / 2);
     }
-    
-    public void turn(Instruction instruction){
+
+    public void turn(Instruction instruction) {
+        System.out.println("Girando, ángulo actual: " + angle);
         if (instruction instanceof RightTurnInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
+            angle += ((RightTurnInstruction) instruction).getAngle();
         }
         if (instruction instanceof LeftTurnInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
-        }
-    }
-    
-    
-    public void setColor(String color){
-        switch(color){
-            case "BLACK":
-                pencilColor = Color.BLACK;
-                break;
-            case "BLUE":
-                pencilColor = Color.BLUE;
-                break;
-            case "CYAN":
-                pencilColor = Color.CYAN;
-                break;
-            
+            angle -= ((LeftTurnInstruction) instruction).getAngle();
         }
     }
 
@@ -102,8 +99,38 @@ public class Turtle extends Sprite{
     public void repeat(int cant, ArrayList<String> instruccionts) {
 
     }
-    
-    public void setDrawable(Drawable drawable){
+
+    public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
+    }
+
+    public int[] updateXPoints() {
+        int[] xAuxPoints = new int[xPoints.size()];
+        for (int i = 0; i < xPoints.size(); i++) {
+            xAuxPoints[i] = xPoints.get(i);
+        }
+        return xAuxPoints;
+    }
+
+    public int[] updateYPoints() {
+        int[] yAuxPoints = new int[yPoints.size()];
+        for (int i = 0; i < yPoints.size(); i++) {
+            yAuxPoints[i] = yPoints.get(i);
+        }
+        return yAuxPoints;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+        this.xPoints = new LinkedList<>();
+        this.xPoints.add(x + width / 2);
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+        this.yPoints = new LinkedList<>();
+        yPoints.add(y + height / 2);
     }
 }
