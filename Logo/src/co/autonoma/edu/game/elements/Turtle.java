@@ -15,19 +15,20 @@ import java.util.ArrayList;
  *
  * @author ASUS
  */
-public class Turtle extends Sprite{
+public class Turtle extends Sprite {
+
     private double angle;
     private Color pencilColor;
     private Drawable drawable;
-    
-    public Turtle(int x, int y, int width, int height){
+
+    public Turtle(int x, int y, int width, int height) {
         super(x, y, width, height);
         this.angle = 0;
         this.pencilColor = Color.BLACK;
     }
 
     public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         g2d.translate(x, y);
         g2d.rotate(Math.toRadians(angle));
         g2d.setColor(pencilColor);
@@ -35,53 +36,52 @@ public class Turtle extends Sprite{
     }
 
     public void handleInstruction(Instruction instruction) throws NumberFormatException {
-        if (instruction instanceof SetColorInstruction){
+        if (instruction instanceof SetColorInstruction) {
             //setColor((SetColorInstruction)instruction);
             //drawable.redraw();
             return;
         }
         if (instruction instanceof ForwardInstruction
-         || instruction instanceof BackwardInstruction) {
+                || instruction instanceof BackwardInstruction) {
             move(instruction);
             drawable.redraw();
         }
-        if (instruction instanceof RightTurnInstruction 
-        || instruction instanceof LeftTurnInstruction){
+        if (instruction instanceof RightTurnInstruction
+                || instruction instanceof LeftTurnInstruction) {
             turn(instruction);
             drawable.redraw();
         }
     }
-    
-    public void move(Instruction instruction){
+
+    public void move(Instruction instruction) {
         double aux_x = x;
         double aux_y = y;
         if (instruction instanceof ForwardInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
-            aux_x = aux_x + (Math.sin(Math.toRadians(angle))*value);
-            aux_y = aux_y - (Math.cos(Math.toRadians(angle))*value);
+            int value = ((ForwardInstruction) instruction).getDistance();
+            aux_x = aux_x + (Math.sin(Math.toRadians(angle)) * value);
+            aux_y = aux_y - (Math.cos(Math.toRadians(angle)) * value);
         }
         if (instruction instanceof BackwardInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
-            aux_x = aux_x - (Math.sin(Math.toRadians(angle))*value);
-            aux_y = aux_y + (Math.cos(Math.toRadians(angle))*value);
+            int value = ((ForwardInstruction) instruction).getDistance();
+            aux_x = aux_x - (Math.sin(Math.toRadians(angle)) * value);
+            aux_y = aux_y + (Math.cos(Math.toRadians(angle)) * value);
         }
-        
-        x = (int)Math.round(aux_x);
-        y = (int)Math.round(aux_y);
+
+        x = (int) Math.round(aux_x);
+        y = (int) Math.round(aux_y);
     }
-    
-    public void turn(Instruction instruction){
+
+    public void turn(Instruction instruction) {
         if (instruction instanceof RightTurnInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
+            int value = ((ForwardInstruction) instruction).getDistance();
         }
         if (instruction instanceof LeftTurnInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
+            int value = ((ForwardInstruction) instruction).getDistance();
         }
     }
-    
-    
-    public void setColor(String color){
-        switch(color){
+
+    public void setColor(String color) {
+        switch (color) {
             case "BLACK":
                 pencilColor = Color.BLACK;
                 break;
@@ -91,7 +91,7 @@ public class Turtle extends Sprite{
             case "CYAN":
                 pencilColor = Color.CYAN;
                 break;
-            
+
         }
     }
 
@@ -102,8 +102,8 @@ public class Turtle extends Sprite{
     public void repeat(int cant, ArrayList<String> instruccionts) {
 
     }
-    
-    public void setDrawable(Drawable drawable){
+
+    public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
     }
 }

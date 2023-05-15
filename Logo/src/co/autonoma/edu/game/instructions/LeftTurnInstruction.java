@@ -4,19 +4,32 @@
  */
 package co.autonoma.edu.game.instructions;
 
+import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+
 /**
  *
  * @author izibr
  */
 public class LeftTurnInstruction extends Instruction{
-
+    private int angle;
     public LeftTurnInstruction() {
         super(1);
     }
     
     @Override
     public void setParameter(String parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        noParameterValidation(parameter);
+        parametersValidation(parameter);
+        int auxAngle = Integer.parseInt(parameter.split(" ")[1]);
+        if (auxAngle >= 0) {
+            this.angle = auxAngle;
+        } else {
+            throw new NegativeDistanceException();
+        }
+    }
+
+    public int getAngle() {
+        return angle;
     }
     
 }

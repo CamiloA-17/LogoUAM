@@ -42,7 +42,7 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
     }
 
     public void handleInstruction(String instruction) throws NotAvailableInstructionException, ParametersExceededException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException {
-        Instruction newInstruction = program.handleInstruction(instruction); // -> Si se tira una excepción, esto no se ejecuta
+        Instruction newInstruction = program.handleInstruction(instruction); // -> Si se tira una excepción, lo que sigue no se ejecuta
         turtle.handleInstruction(newInstruction);
     }
 
