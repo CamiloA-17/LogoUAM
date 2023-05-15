@@ -4,6 +4,7 @@
  */
 package co.autonoma.edu.game.instructions;
 
+import co.autonoma.edu.game.exceptions.NotAvailableColorException;
 import java.awt.Color;
 
 /**
@@ -55,8 +56,14 @@ public class SetColorInstruction extends Instruction {
                 this.color = Color.YELLOW;
                 break;
             default:
-                //throw exception
+                throw new NotAvailableColorException(colorName);
         }
     }
+
+    public Color getColor() {
+        return color;
+    }
+    
+    
 
 }

@@ -4,7 +4,7 @@
  */
 package co.autonoma.edu.game.instructions;
 
-import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+import co.autonoma.edu.game.exceptions.NegativeAngleException;
 
 /**
  *
@@ -24,7 +24,7 @@ public class LeftTurnInstruction extends Instruction{
         if (auxAngle >= 0) {
             this.angle = auxAngle;
         } else {
-            throw new NegativeDistanceException();
+            throw new NegativeAngleException();
         }
     }
 

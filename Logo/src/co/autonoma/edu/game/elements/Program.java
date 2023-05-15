@@ -21,19 +21,19 @@ public class Program {
         instructions = new LinkedList<>();
     }
     
-    public Instruction handleInstruction(String instruction) throws NotAvailableInstructionException, VoidInstructionException, ParametersExceededException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException{
+    public Instruction handleInstruction(String instruction) throws NotAvailableInstructionException, VoidInstructionException, ParametersExceededException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException, NotAvailableColorException{
         if (instruction.length() > 0) {
             String command = instruction.split(" ")[0].toUpperCase();
             if (command.equals("FD") || command.equals("FORWARD")) {
                 return addForwardInstruction(instruction); // -> throws exceptions
             } else if (command.equals("BD") || command.equals("BACKWARD")) {
-                
+                return addBackwardInstruction(instruction);
             } else if (command.equals("RT") || command.equals("RIGHTTURN")) {
-
+                return addRightTurnInstruction(instruction);
             } else if (command.equals("LT") || command.equals("LEFTTURN")) {
-
+                return addLeftTurnInstruction(instruction);
             } else if (command.equals("SC") || command.equals("SETCOLOR")) {
-                
+                return addSetColorInstruction(instruction);
             } else if (command.equals("R") || command.equals("RESET")) {
                 
             } else if (command.equals("H") || command.equals("HOME")) {
@@ -43,10 +43,10 @@ public class Program {
             } else if (command.equals("S") || command.equals("SAVE")) {
                 
             } else {
-                throw new NotAvailableInstructionException(instruction); // throw exception
+                throw new NotAvailableInstructionException(instruction);
             }
         } else {
-            throw new VoidInstructionException(); //throw exception
+            throw new VoidInstructionException();
         }
         return null;
     }
@@ -57,4 +57,38 @@ public class Program {
         instructions.add(newInstruction);
         return newInstruction;
     }
-}
+    
+    public Instruction addBackwardInstruction(String instruction) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException{
+        Instruction newInstruction = new BackwardInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    public Instruction addRightTurnInstruction(String instruction) throws NumberFormatException, NegativeAngleException, PatternSyntaxException{
+        Instruction newInstruction = new RightTurnInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    
+    public Instruction addLeftTurnInstruction(String instruction) throws NumberFormatException, NegativeAngleException, PatternSyntaxException{
+        Instruction newInstruction = new LeftTurnInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    public Instruction addSetColorInstruction(String instruction) throws ParametersExceededException, NotAvailableColorException{
+        Instruction newInstruction = new SetColorInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    
+    
+}   

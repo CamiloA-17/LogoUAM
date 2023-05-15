@@ -6,6 +6,7 @@ package co.autonoma.edu.game.elements;
 
 import co.autonoma.edu.game.exceptions.NegativeDistanceException;
 import co.autonoma.edu.game.exceptions.NoParameterException;
+import co.autonoma.edu.game.exceptions.NotAvailableColorException;
 import co.autonoma.edu.game.exceptions.NotAvailableInstructionException;
 import co.autonoma.edu.game.exceptions.ParametersExceededException;
 import co.autonoma.edu.game.exceptions.VoidInstructionException;
@@ -41,11 +42,12 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
         turtle = new Turtle(0, 0, TURTLE_WIDTH, TURTLE_HEIGHT);
     }
 
-    public void handleInstruction(String instruction) throws NotAvailableInstructionException, ParametersExceededException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException {
+    public void handleInstruction(String instruction) throws NotAvailableInstructionException, ParametersExceededException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException, NotAvailableColorException {
         Instruction newInstruction = program.handleInstruction(instruction); // -> Si se tira una excepción, lo que sigue no se ejecuta
         turtle.handleInstruction(newInstruction);
     }
 
+    @Override
     public void draw(Graphics g) {
         turtle.draw(g);
     }

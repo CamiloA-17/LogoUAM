@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.function.IntFunction;
 
 /**
  *
@@ -20,6 +22,8 @@ public class Turtle extends Sprite {
     private double angle;
     private Color pencilColor;
     private Drawable drawable;
+    private LinkedList<Integer> xPoints;
+    private LinkedList<Integer> yPoints;
 
     public Turtle(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -29,6 +33,8 @@ public class Turtle extends Sprite {
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.RED);
+        g2d.drawPolyline(updateXPoints(), updateYPoints(), xPoints.size());
         g2d.translate(x, y);
         g2d.rotate(Math.toRadians(angle));
         g2d.setColor(pencilColor);
@@ -37,8 +43,8 @@ public class Turtle extends Sprite {
 
     public void handleInstruction(Instruction instruction) throws NumberFormatException {
         if (instruction instanceof SetColorInstruction) {
-            //setColor((SetColorInstruction)instruction);
-            //drawable.redraw();
+            pencilColor = ((SetColorInstruction) instruction).getColor();
+            drawable.redraw();
             return;
         }
         if (instruction instanceof ForwardInstruction
@@ -62,36 +68,24 @@ public class Turtle extends Sprite {
             aux_y = aux_y - (Math.cos(Math.toRadians(angle)) * value);
         }
         if (instruction instanceof BackwardInstruction) {
-            int value = ((ForwardInstruction) instruction).getDistance();
+            int value = ((BackwardInstruction) instruction).getDistance();
             aux_x = aux_x - (Math.sin(Math.toRadians(angle)) * value);
             aux_y = aux_y + (Math.cos(Math.toRadians(angle)) * value);
         }
-
+        
         x = (int) Math.round(aux_x);
         y = (int) Math.round(aux_y);
+        xPoints.add(x);
+        yPoints.add(y);
     }
 
     public void turn(Instruction instruction) {
+        System.out.println("Girando, ángulo actual: " + angle);
         if (instruction instanceof RightTurnInstruction) {
-            int value = ((ForwardInstruction) instruction).getDistance();
+           angle += ((RightTurnInstruction) instruction).getAngle();
         }
         if (instruction instanceof LeftTurnInstruction) {
-            int value = ((ForwardInstruction) instruction).getDistance();
-        }
-    }
-
-    public void setColor(String color) {
-        switch (color) {
-            case "BLACK":
-                pencilColor = Color.BLACK;
-                break;
-            case "BLUE":
-                pencilColor = Color.BLUE;
-                break;
-            case "CYAN":
-                pencilColor = Color.CYAN;
-                break;
-
+            angle -= ((LeftTurnInstruction) instruction).getAngle();
         }
     }
 
@@ -106,4 +100,38 @@ public class Turtle extends Sprite {
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
     }
-}
+    
+    public int[] updateXPoints(){
+        int[] xAuxPoints = new int[xPoints.size()];
+        System.out.println("------X-----");
+        for(int i = 0; i < xPoints.size(); i++){
+            System.out.println("Añadiendo: " + xPoints.get(i));
+            xAuxPoints[i] = xPoints.get(i);
+        }
+        return xAuxPoints;
+    }
+    
+    public int[] updateYPoints(){
+        int[] yAuxPoints = new int[yPoints.size()];
+        System.out.println("------Y-----");
+        for(int i = 0; i < yPoints.size(); i++){
+            System.out.println("Añadiendo: " + yPoints.get(i));
+            yAuxPoints[i] = yPoints.get(i);
+        }
+        return yAuxPoints;
+    }
+    
+    @Override
+    public void setX(int x){
+        this.x = x;
+        this.xPoints = new LinkedList<>();
+        this.xPoints.add(x);
+    }
+    
+    @Override
+    public void setY(int y){
+        this.y = y;
+        this.yPoints = new LinkedList<>();
+        yPoints.add(y);
+    }
+}   
