@@ -9,7 +9,12 @@ package co.autonoma.edu.game.instructions;
  * @author izibr
  */
 public class BackwardInstruction extends Instruction{
-
+    public int distance;
+    
+    public BackwardInstruction() {
+        super(1);
+    }
+    
     @Override
     public void setParameter(String parameter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

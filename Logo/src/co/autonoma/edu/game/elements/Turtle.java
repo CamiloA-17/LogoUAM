@@ -45,8 +45,8 @@ public class Turtle extends Sprite{
             move(instruction);
             drawable.redraw();
         }
-        if (instruction.equals("RT") || instruction.equals("RIGHTTURN") 
-        || instruction.equals("LT") || instruction.equals("LEFTTURN")){
+        if (instruction instanceof RightTurnInstruction 
+        || instruction instanceof LeftTurnInstruction){
             turn(instruction);
             drawable.redraw();
         }

@@ -8,10 +8,10 @@ package co.autonoma.edu.game.exceptions;
  *
  * @author izibr
  */
-public class VoidInstructionException extends RuntimeException{
+public class NoParameterException extends RuntimeException{
 
-    public VoidInstructionException() {
-        super("La instruccion está vacia");
+    public NoParameterException() {
+        super("No ingresó un parámetro");
     }
     
 }

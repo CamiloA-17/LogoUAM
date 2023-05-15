@@ -10,6 +10,10 @@ package co.autonoma.edu.game.instructions;
  */
 public class LoadInstruction extends Instruction{
 
+    public LoadInstruction() {
+        super(1);
+    }
+    
     @Override
     public void setParameter(String parameter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

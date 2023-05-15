@@ -4,12 +4,18 @@
  */
 package co.autonoma.edu.game.elements;
 
+import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+import co.autonoma.edu.game.exceptions.NoParameterException;
+import co.autonoma.edu.game.exceptions.NotAvailableInstructionException;
+import co.autonoma.edu.game.exceptions.ParametersExceededException;
+import co.autonoma.edu.game.exceptions.VoidInstructionException;
 import co.autonoma.edu.game.files.DocumentReader;
 import co.autonoma.edu.game.files.DocumentWriter;
 import co.autonoma.edu.game.instructions.Instruction;
 import co.autonoma.edu.game.interfaces.Dimensionable;
 import co.autonoma.edu.game.interfaces.Drawable;
 import java.awt.Graphics;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.DefaultListModel;
 
 /**
@@ -35,7 +41,7 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
         turtle = new Turtle(0, 0, TURTLE_WIDTH, TURTLE_HEIGHT);
     }
 
-    public void addInstruction(String instruction) {
+    public void handleInstruction(String instruction) throws NotAvailableInstructionException, ParametersExceededException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException {
         Instruction newInstruction = program.handleInstruction(instruction); // -> Si se tira una excepción, esto no se ejecuta
         turtle.handleInstruction(newInstruction);
     }

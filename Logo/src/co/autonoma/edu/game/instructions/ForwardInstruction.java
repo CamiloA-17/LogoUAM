@@ -5,41 +5,35 @@
 package co.autonoma.edu.game.instructions;
 
 import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+import co.autonoma.edu.game.exceptions.NoParameterException;
 import co.autonoma.edu.game.exceptions.ParametersExceededException;
+import co.autonoma.edu.game.interfaces.Limitable;
 import java.util.regex.PatternSyntaxException;
 
 /**
  *
  * @author izibr
  */
-public class ForwardInstruction extends Instruction {
-
+public class ForwardInstruction extends Instruction{
     private int distance;
 
     public ForwardInstruction() {
-
+        super(1);
     }
+    
 
     @Override
-    public void setParameter(String parameter) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException {
-        if (parameter.split(" ").length < 3) {
-            int auxDistance = Integer.parseInt(parameter.split(" ")[1]);
-            if (auxDistance >= 0) {
-                this.distance = auxDistance;
-            } else {
-                throw new NegativeDistanceException();
-            }
+    public void setParameter(String parameter) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException, ParametersExceededException, NoParameterException{
+        noParameterValidation(parameter);
+        parametersValidation(parameter);
+        int auxDistance = Integer.parseInt(parameter.split(" ")[1]);
+        if (auxDistance >= 0) {
+            this.distance = auxDistance;
         } else {
-            String[] parameters = parameter.split(" ");
-            String extraParameters = "";
-            for (int i = 2; i < parameters.length; i++) {
-                extraParameters += parameters[i] + " ";
-            }
-            throw new ParametersExceededException(extraParameters);
+            throw new NegativeDistanceException();
         }
+
     }
-    
-    
 
     public int getDistance() {
         return distance;

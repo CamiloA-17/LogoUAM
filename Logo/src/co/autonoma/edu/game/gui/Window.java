@@ -5,12 +5,11 @@
 package co.autonoma.edu.game.gui;
 
 import co.autonoma.edu.game.elements.Interpreter;
-import co.autonoma.edu.game.interfaces.Drawable;
-import co.autonoma.edu.game.files.InstructionsManager;
-import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
+import co.autonoma.edu.game.exceptions.*;
+import java.util.regex.PatternSyntaxException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,9 +128,26 @@ public class Window extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//throws NotAvailableInstructionException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, ParametersExceededException
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        interpreter.addInstruction(this.txtPrompt.getText());
+        try{
+            interpreter.handleInstruction(this.txtPrompt.getText());
+        }catch (NotAvailableInstructionException e1){
+            JOptionPane.showMessageDialog(this, e1.getMessage());
+        }catch (VoidInstructionException e2){
+            JOptionPane.showMessageDialog(this, e2.getMessage());
+        }catch (NumberFormatException e3){
+            JOptionPane.showMessageDialog(this, e3.getMessage());
+        }catch (ParametersExceededException e4){
+            JOptionPane.showMessageDialog(this, e4.getMessage());
+        }catch(NegativeDistanceException e5){
+            JOptionPane.showMessageDialog(this, e5.getMessage());
+        }catch(PatternSyntaxException e6){
+            JOptionPane.showMessageDialog(this, e6.getMessage());
+        }catch (NoParameterException e7){
+            JOptionPane.showMessageDialog(this, e7.getMessage());
+        }
+        
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**

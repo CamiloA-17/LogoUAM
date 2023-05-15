@@ -21,7 +21,7 @@ public class Program {
         instructions = new LinkedList<>();
     }
     
-    public Instruction handleInstruction(String instruction) {
+    public Instruction handleInstruction(String instruction) throws NotAvailableInstructionException, VoidInstructionException, ParametersExceededException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException{
         if (instruction.length() > 0) {
             String command = instruction.split(" ")[0].toUpperCase();
             if (command.equals("FD") || command.equals("FORWARD")) {

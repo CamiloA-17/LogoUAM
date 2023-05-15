@@ -10,6 +10,10 @@ package co.autonoma.edu.game.instructions;
  */
 public class ResetInstruction extends Instruction{
 
+    public ResetInstruction() {
+        super(0);
+    }
+    
     @Override
     public void setParameter(String parameter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
