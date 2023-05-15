@@ -61,7 +61,7 @@ public class Turtle extends Sprite{
             aux_y = aux_y - (Math.cos(Math.toRadians(angle))*value);
         }
         if (instruction instanceof BackwardInstruction) {
-            int value = ((ForwardInstruction)instruction).getDistance();
+            int value = ((BackwardInstruction)instruction).getDistance();
             aux_x = aux_x - (Math.sin(Math.toRadians(angle))*value);
             aux_y = aux_y + (Math.cos(Math.toRadians(angle))*value);
         }

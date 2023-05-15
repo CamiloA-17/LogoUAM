@@ -4,6 +4,8 @@
  */
 package co.autonoma.edu.game.instructions;
 
+import co.autonoma.edu.game.exceptions.NegativeDistanceException;
+
 /**
  *
  * @author izibr
@@ -17,7 +19,17 @@ public class BackwardInstruction extends Instruction{
     
     @Override
     public void setParameter(String parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        noParameterValidation(parameter);
+        parametersValidation(parameter);
+        int auxDistance = Integer.parseInt(parameter.split(" ")[1]);
+        if (auxDistance >= 0) {
+            this.distance = auxDistance;
+        } else {
+            throw new NegativeDistanceException();
+        }
     }
-    
+
+    public int getDistance() {
+        return distance;
+    }
 }

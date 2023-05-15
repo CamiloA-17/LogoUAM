@@ -32,7 +32,6 @@ public class ForwardInstruction extends Instruction{
         } else {
             throw new NegativeDistanceException();
         }
-
     }
 
     public int getDistance() {

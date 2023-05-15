@@ -27,7 +27,7 @@ public class Program {
             if (command.equals("FD") || command.equals("FORWARD")) {
                 return addForwardInstruction(instruction); // -> throws exceptions
             } else if (command.equals("BD") || command.equals("BACKWARD")) {
-                
+                return addBackwardInstruction(instruction); // -> throws exceptions
             } else if (command.equals("RT") || command.equals("RIGHTTURN")) {
 
             } else if (command.equals("LT") || command.equals("LEFTTURN")) {
@@ -53,6 +53,13 @@ public class Program {
     
     public Instruction addForwardInstruction(String instruction) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException{
         Instruction newInstruction = new ForwardInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    
+    public Instruction addBackwardInstruction(String instruction) throws NumberFormatException, NegativeDistanceException{
+        Instruction newInstruction = new BackwardInstruction();
         newInstruction.setParameter(instruction);
         instructions.add(newInstruction);
         return newInstruction;
