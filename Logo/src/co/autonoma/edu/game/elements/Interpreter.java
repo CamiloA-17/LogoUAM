@@ -16,6 +16,7 @@ import co.autonoma.edu.game.instructions.Instruction;
 import co.autonoma.edu.game.interfaces.Dimensionable;
 import co.autonoma.edu.game.interfaces.Drawable;
 import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.DefaultListModel;
 
@@ -31,7 +32,7 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
     private Turtle turtle;
     private Drawable drawable;
 
-    private final int TURTLE_WIDTH = 30;
+    private final int TURTLE_WIDTH = 56;
     private final int TURTLE_HEIGHT = 50;
 
     public Interpreter() {
@@ -56,15 +57,22 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
         turtle.setX(this.width / 2 - TURTLE_WIDTH / 2);
         turtle.setY(this.height / 2 - TURTLE_HEIGHT / 2);
         turtle.setDrawable(this);
+        turtle.setArea(this.getArea());
     }
     
     public void setDrawable(Drawable drawable){
         this.drawable = drawable;
     }
     
+    
     @Override
     public void redraw() {
         this.drawable.redraw();
+    }
+
+    @Override
+    public ImageObserver getObserver() {
+        return this.area.getObserver();
     }
     
     

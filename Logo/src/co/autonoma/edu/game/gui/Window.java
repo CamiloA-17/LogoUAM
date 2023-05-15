@@ -8,6 +8,8 @@ import co.autonoma.edu.game.elements.Interpreter;
 import javax.swing.DefaultListModel;
 import javax.swing.border.BevelBorder;
 import co.autonoma.edu.game.exceptions.*;
+import co.autonoma.edu.game.interfaces.Dimensionable;
+import java.awt.image.ImageObserver;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
 
@@ -15,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author izibr
  */
-public class Window extends javax.swing.JFrame {
+public class Window extends javax.swing.JFrame implements Dimensionable{
 
     private Interpreter interpreter;
     private TurtleWindow turtleWindow;
@@ -44,6 +46,7 @@ public class Window extends javax.swing.JFrame {
         this.interpreter.setY(PANEL_Y);
         this.interpreter.setWidth(PANEL_WIDTH);
         this.interpreter.setHeight(PANEL_HEIGHT);
+        this.interpreter.setArea(this);
         this.interpreter.setInitialTurtleValues();
         this.interpreter.setDrawable(this.turtleWindow);
         turtleWindow.setInterpreter(this.interpreter);
@@ -167,6 +170,11 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JList<String> listInstructions;
     private javax.swing.JTextField txtPrompt;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ImageObserver getObserver() {
+        return turtleWindow;
+    }
 
     //@Override
     //public void fillList(DefaultListModel data) {

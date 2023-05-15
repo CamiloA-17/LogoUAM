@@ -4,6 +4,7 @@
  */
 package co.autonoma.edu.game.elements;
 
+import co.autonoma.edu.game.interfaces.Dimensionable;
 import java.awt.Graphics;
 
 /**
@@ -16,6 +17,7 @@ public abstract class Sprite {
     protected int y;
     protected int width;
     protected int height;
+    protected Dimensionable area;
 
     public Sprite(int x, int y, int width, int height) {
         setX(x);
@@ -57,4 +59,14 @@ public abstract class Sprite {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public Dimensionable getArea() {
+        return area;
+    }
+    
+    public void setArea(Dimensionable area) {
+        this.area = area;
+    }
+    
+    
 }
