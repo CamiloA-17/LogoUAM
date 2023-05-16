@@ -23,8 +23,6 @@ public class Turtle extends Sprite {
     private double angle;
     private Color pencilColor;
     private Drawable drawable;
-    private LinkedList<Integer> xPoints;
-    private LinkedList<Integer> yPoints;
     private ImageIcon image;
     private int initialX;
     private int initialY;
@@ -91,8 +89,6 @@ public class Turtle extends Sprite {
         lines.add(newLine);
         x = (int) Math.round(aux_x);
         y = (int) Math.round(aux_y);
-        //xPoints.add(x + width / 2);
-        //yPoints.add(y + height / 2);
     }
 
     public void turn(Instruction instruction) {
@@ -106,10 +102,10 @@ public class Turtle extends Sprite {
 
     public void home(Instruction instruction) {
         if (instruction instanceof HomeInstruction) {
+            Line newLine = new Line(this.pencilColor, x + width / 2, y + height / 2, initialX + width / 2, initialY + height / 2);
+            lines.add(newLine);
             this.x = initialX;
             this.y = initialY;
-            xPoints.add(x + width / 2);
-            yPoints.add(y + height / 2);
         }
     }
 
@@ -118,6 +114,7 @@ public class Turtle extends Sprite {
             this.setX(initialX);
             this.setY(initialY);
             this.angle = 0;
+            this.lines.clear();
         }
     }
 
@@ -128,36 +125,15 @@ public class Turtle extends Sprite {
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
     }
-
-    public int[] updateXPoints() {
-        int[] xAuxPoints = new int[xPoints.size()];
-        for (int i = 0; i < xPoints.size(); i++) {
-            xAuxPoints[i] = xPoints.get(i);
-        }
-        return xAuxPoints;
-    }
-
-    public int[] updateYPoints() {
-        int[] yAuxPoints = new int[yPoints.size()];
-        for (int i = 0; i < yPoints.size(); i++) {
-            yAuxPoints[i] = yPoints.get(i);
-        }
-        return yAuxPoints;
-    }
-
     @Override
     public void setX(int x) {
         this.x = x;
         this.initialX = x;
-        this.xPoints = new LinkedList<>();
-        this.xPoints.add(x + width / 2);
     }
 
     @Override
     public void setY(int y) {
         this.y = y;
         this.initialY = y;
-        this.yPoints = new LinkedList<>();
-        yPoints.add(y + height / 2);
     }
 }
