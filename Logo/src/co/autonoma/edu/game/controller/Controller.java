@@ -17,6 +17,4 @@ public class Controller {
         mainWindow.setInterpreter(interpreter);
         mainWindow.setVisible(true);
     }
-    
-    
 }

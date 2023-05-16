@@ -17,7 +17,7 @@ public class HomeInstruction extends Instruction{
 
     @Override
     public void setParameter(String parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        parametersValidation(parameter);
     }
-    
+
 }
