@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -26,12 +27,14 @@ public class Turtle extends Sprite {
     private LinkedList<Integer> xPoints;
     private LinkedList<Integer> yPoints;
     private ImageIcon image;
+    private int initialX;
+    private int initialY;
 
     public Turtle(int x, int y, int width, int height) {
         super(x, y, width, height);
         this.angle = 0;
         this.pencilColor = Color.BLACK;
-        this.image = new ImageIcon("C:\\Users\\izibr\\OneDrive\\Escritorio\\Universidad\\ProOri\\ProjectLogo\\LogoUAM\\Logo\\src\\co\\autonoma\\edu\\game\\imgs\\turtle.png");
+        this.image = new ImageIcon("C:/Users/ASUS/Mi unidad/UAM/POO/LogoUAM/Logo/src/co/autonoma/edu/game/imgs/turtle.png");
     }
 
     public void draw(Graphics g) {
@@ -58,6 +61,14 @@ public class Turtle extends Sprite {
         if (instruction instanceof RightTurnInstruction
                 || instruction instanceof LeftTurnInstruction) {
             turn(instruction);
+            drawable.redraw();
+        }
+        if (instruction instanceof HomeInstruction){
+            home(instruction);
+            drawable.redraw();
+        }
+        if (instruction instanceof ResetInstruction){
+            reset(instruction);
             drawable.redraw();
         }
     }
@@ -92,8 +103,23 @@ public class Turtle extends Sprite {
         }
     }
 
-    public void home() {
+    public void home(Instruction instruction) {
+        if (instruction instanceof HomeInstruction) {
+            System.out.println("Volviendo a posicion inicial");
+            this.x= initialX;
+            this.y= initialY;
+            xPoints.add(x + width / 2);
+            yPoints.add(y + height / 2);
+        }
+    }
 
+    public void reset(Instruction instruction){
+        System.out.println("Reiniciando");
+        if(instruction instanceof ResetInstruction){
+            this.setX(initialX);
+            this.setY(initialY);
+            this.angle=0;
+        }
     }
 
     public void repeat(int cant, ArrayList<String> instruccionts) {
@@ -123,6 +149,7 @@ public class Turtle extends Sprite {
     @Override
     public void setX(int x) {
         this.x = x;
+        this.initialX= x;
         this.xPoints = new LinkedList<>();
         this.xPoints.add(x + width / 2);
     }
@@ -130,6 +157,7 @@ public class Turtle extends Sprite {
     @Override
     public void setY(int y) {
         this.y = y;
+        this.initialY= y;
         this.yPoints = new LinkedList<>();
         yPoints.add(y + height / 2);
     }

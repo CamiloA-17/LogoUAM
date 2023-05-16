@@ -35,9 +35,9 @@ public class Program {
             } else if (command.equals("SC") || command.equals("SETCOLOR")) {
                 return addSetColorInstruction(instruction);
             } else if (command.equals("R") || command.equals("RESET")) {
-                
+                return addResetInstruction(instruction);
             } else if (command.equals("H") || command.equals("HOME")) {
-                
+                return addHomeInstruction(instruction);
             } else if (command.equals("L") || command.equals("LOAD")) {
                 
             } else if (command.equals("S") || command.equals("SAVE")) {
@@ -85,6 +85,20 @@ public class Program {
     
     public Instruction addSetColorInstruction(String instruction) throws ParametersExceededException, NotAvailableColorException{
         Instruction newInstruction = new SetColorInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    // -------------------------------------------------------------------------
+    public Instruction addHomeInstruction(String instruction) throws ParametersExceededException{
+        Instruction newInstruction = new HomeInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+    // -------------------------------------------------------------------------
+    public Instruction addResetInstruction(String instruction) throws ParametersExceededException{
+        Instruction newInstruction= new ResetInstruction();
         newInstruction.setParameter(instruction);
         instructions.add(newInstruction);
         return newInstruction;

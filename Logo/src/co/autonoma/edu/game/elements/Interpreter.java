@@ -64,7 +64,6 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
         this.drawable = drawable;
     }
     
-    
     @Override
     public void redraw() {
         this.drawable.redraw();

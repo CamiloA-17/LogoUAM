@@ -21,7 +21,7 @@ public abstract class Instruction {
     
     public abstract void setParameter(String parameter);
     
-     public void parametersValidation(String parameter) {
+    public void parametersValidation(String parameter) {
         if (parameter.split(" ").length > argCount + 1) {
             String[] parameters = parameter.split(" ");
             String extraParameters = "";
@@ -33,8 +33,8 @@ public abstract class Instruction {
     }
 
     public void noParameterValidation(String parameter) {
-       if (parameter.split(" ").length < 2){
-           throw new NoParameterException();
-       }
+        if (parameter.split(" ").length < 2){
+            throw new NoParameterException();
+        }
     }
 }
