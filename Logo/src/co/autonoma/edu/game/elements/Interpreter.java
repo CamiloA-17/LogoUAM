@@ -15,6 +15,7 @@ import co.autonoma.edu.game.files.DocumentWriter;
 import co.autonoma.edu.game.instructions.Instruction;
 import co.autonoma.edu.game.interfaces.Dimensionable;
 import co.autonoma.edu.game.interfaces.Drawable;
+import co.autonoma.edu.game.interfaces.Fillable;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import java.util.regex.PatternSyntaxException;
@@ -30,6 +31,7 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
     private DocumentWriter writer;
     private Program program;
     private Turtle turtle;
+    private Fillable fillable;
     private Drawable drawable;
 
     private final int TURTLE_WIDTH = 56;
@@ -63,6 +65,10 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
     public void setDrawable(Drawable drawable){
         this.drawable = drawable;
     }
+
+    public void setFillable(Fillable fillable) {
+        this.fillable = fillable;
+    }
     
     @Override
     public void redraw() {
@@ -72,6 +78,10 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
     @Override
     public ImageObserver getObserver() {
         return this.area.getObserver();
+    }
+    
+    public void updateList(Instruction instruction){
+        
     }
     
     

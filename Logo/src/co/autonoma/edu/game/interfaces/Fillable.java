@@ -4,12 +4,12 @@
  */
 package co.autonoma.edu.game.interfaces;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author izibr
  */
-public interface Limitable {
-    public final int LIMIT = 2;
-    public void parametersValidation(String parameter);
-    public void noParameterValidation(String parameter);
+public interface Fillable {
+    public void updateList(DefaultListModel model);
 }

@@ -7,8 +7,8 @@ package co.autonoma.edu.game.instructions;
 import co.autonoma.edu.game.exceptions.NegativeDistanceException;
 import co.autonoma.edu.game.exceptions.NoParameterException;
 import co.autonoma.edu.game.exceptions.ParametersExceededException;
-import co.autonoma.edu.game.interfaces.Limitable;
 import java.util.regex.PatternSyntaxException;
+import co.autonoma.edu.game.interfaces.Fillable;
 
 /**
  *

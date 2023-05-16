@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -34,7 +33,7 @@ public class Turtle extends Sprite {
         super(x, y, width, height);
         this.angle = 0;
         this.pencilColor = Color.BLACK;
-        this.image = new ImageIcon("C:/Users/ASUS/Mi unidad/UAM/POO/LogoUAM/Logo/src/co/autonoma/edu/game/imgs/turtle.png");
+        this.image = new ImageIcon("C:\\Users\\izibr\\OneDrive\\Escritorio\\Universidad\\ProOri\\ProjectLogo\\LogoUAM\\Logo\\src\\co\\autonoma\\edu\\game\\imgs\\turtle.png");
     }
 
     public void draw(Graphics g) {

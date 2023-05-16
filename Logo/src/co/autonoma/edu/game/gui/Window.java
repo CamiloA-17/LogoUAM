@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.border.BevelBorder;
 import co.autonoma.edu.game.exceptions.*;
 import co.autonoma.edu.game.interfaces.Dimensionable;
+import co.autonoma.edu.game.interfaces.Fillable;
 import java.awt.image.ImageObserver;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author izibr
  */
-public class Window extends javax.swing.JFrame implements Dimensionable{
+public class Window extends javax.swing.JFrame implements Dimensionable, Fillable{
 
     private Interpreter interpreter;
     private TurtleWindow turtleWindow;
@@ -29,7 +30,7 @@ public class Window extends javax.swing.JFrame implements Dimensionable{
     /**
      * Creates new form Window
      */
-    public Window() {
+    public Window(){
         initComponents();
         setTitle("Logo UAM");
         setResizable(false);
@@ -49,8 +50,8 @@ public class Window extends javax.swing.JFrame implements Dimensionable{
         this.interpreter.setArea(this);
         this.interpreter.setInitialTurtleValues();
         this.interpreter.setDrawable(this.turtleWindow);
+        this.interpreter.setFillable(this);
         turtleWindow.setInterpreter(this.interpreter);
-        //this.interpreter.setDrawable(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -176,8 +177,9 @@ public class Window extends javax.swing.JFrame implements Dimensionable{
         return turtleWindow;
     }
 
-    //@Override
-    //public void fillList(DefaultListModel data) {
-    //this.listInstructions.setModel(data);
-    //}
+
+    @Override
+    public void updateList(DefaultListModel model) {
+        this.listInstructions.setModel(model);
+    }
 }
