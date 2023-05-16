@@ -10,16 +10,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import co.autonoma.edu.game.elements.Program;
+
 /**
  *
  * @author ASUS
  */
 public class DocumentReader extends JFrame {
 
-    private File file;
-
     public DocumentReader() {
-        this.file = file;
     }
 
     public String searchFile() {
@@ -38,12 +37,12 @@ public class DocumentReader extends JFrame {
 
     public String searchFile(File fileName) {
         String desktopPath = "C:\\Users\\izibr\\OneDrive\\Escritorio" + fileName + ".txt";
-        if (file.exists()) {
+        if (fileName.exists()) {
             return desktopPath;
         }
         return null;
     }
-    
+
     public String selectPath(){
         JFileChooser fileChooser= new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -56,25 +55,13 @@ public class DocumentReader extends JFrame {
         return null;
     }
 
-    public void createFile(String fileName,ArrayList<String> Instructions) {
-        String filePath= selectPath();
-        File file = new File(filePath + fileName + ".txt");
-        try {
-            file.createNewFile();
-            writeFile(Instructions, filePath);
-            System.out.println("El archivo se ha creado con exito en: " + filePath);
-        } catch (IOException e) {
-            System.out.println("No se ha podido crear el archivo" + e.getMessage());
-        }
-    }
-
-    public ArrayList readFile() {
+    public Program readFile() {
         String file = searchFile();
-        ArrayList<String> content = new ArrayList<>();
+        Program content = new Program();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                content.add(line);
+                content.handleInstruction(line);
             }
         } catch (IOException e) {
             System.out.println("No se ha podido leer el archivo" + e.getMessage());
@@ -82,11 +69,4 @@ public class DocumentReader extends JFrame {
         return content;
     }
 
-    public void writeFile(ArrayList<String> instructions, String file) throws IOException {
-        try (FileWriter writer = new FileWriter(file)) {
-            for (String line : instructions) {
-                writer.write(line + "\n");
-            }
-        }
-    }
 }

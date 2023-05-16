@@ -13,11 +13,14 @@ import co.autonoma.edu.game.exceptions.VoidInstructionException;
 import co.autonoma.edu.game.files.DocumentReader;
 import co.autonoma.edu.game.files.DocumentWriter;
 import co.autonoma.edu.game.instructions.Instruction;
+import co.autonoma.edu.game.instructions.LoadInstruction;
+import co.autonoma.edu.game.instructions.SaveInstruction;
 import co.autonoma.edu.game.interfaces.Dimensionable;
 import co.autonoma.edu.game.interfaces.Drawable;
 import co.autonoma.edu.game.interfaces.Fillable;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.DefaultListModel;
 
@@ -47,6 +50,12 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
 
     public void handleInstruction(String instruction) throws NotAvailableInstructionException, ParametersExceededException, VoidInstructionException, NumberFormatException, NegativeDistanceException, PatternSyntaxException, NoParameterException, NotAvailableColorException {
         Instruction newInstruction = program.handleInstruction(instruction); // -> Si se tira una excepción, lo que sigue no se ejecuta
+        if (newInstruction instanceof LoadInstruction){
+            reader.readFile();
+        }
+        else if(newInstruction instanceof SaveInstruction){
+            // writer.createFile(name, newInstruction);
+        }
         turtle.handleInstruction(newInstruction);
     }
 
