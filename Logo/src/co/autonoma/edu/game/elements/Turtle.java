@@ -28,19 +28,21 @@ public class Turtle extends Sprite {
     private ImageIcon image;
     private int initialX;
     private int initialY;
+    private LinkedList<Line> lines;
 
     public Turtle(int x, int y, int width, int height) {
         super(x, y, width, height);
         this.angle = 0;
         this.pencilColor = Color.BLACK;
+        this.lines = new LinkedList<>();
         this.image = new ImageIcon("C:\\Users\\izibr\\OneDrive\\Escritorio\\Universidad\\ProOri\\ProjectLogo\\LogoUAM\\Logo\\src\\co\\autonoma\\edu\\game\\imgs\\turtle.png");
     }
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        System.out.println(image.getIconHeight());
-        g2d.setColor(pencilColor);
-        g2d.drawPolyline(updateXPoints(), updateYPoints(), xPoints.size());
+        for (Line line : lines) {
+            line.draw(g2d);
+        }
         g2d.translate(x, y);
         AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(angle), width / 2, height / 2);
         g2d.drawImage(image.getImage(), tx, area.getObserver());
@@ -62,11 +64,11 @@ public class Turtle extends Sprite {
             turn(instruction);
             drawable.redraw();
         }
-        if (instruction instanceof HomeInstruction){
+        if (instruction instanceof HomeInstruction) {
             home(instruction);
             drawable.redraw();
         }
-        if (instruction instanceof ResetInstruction){
+        if (instruction instanceof ResetInstruction) {
             reset(instruction);
             drawable.redraw();
         }
@@ -85,15 +87,15 @@ public class Turtle extends Sprite {
             aux_x = aux_x - (Math.sin(Math.toRadians(angle)) * value);
             aux_y = aux_y + (Math.cos(Math.toRadians(angle)) * value);
         }
-
+        Line newLine = new Line(this.pencilColor, x + width / 2, y + height / 2, (int) Math.round(aux_x) + width / 2, (int) Math.round(aux_y) + height / 2);
+        lines.add(newLine);
         x = (int) Math.round(aux_x);
         y = (int) Math.round(aux_y);
-        xPoints.add(x + width / 2);
-        yPoints.add(y + height / 2);
+        //xPoints.add(x + width / 2);
+        //yPoints.add(y + height / 2);
     }
 
     public void turn(Instruction instruction) {
-        System.out.println("Girando, ángulo actual: " + angle);
         if (instruction instanceof RightTurnInstruction) {
             angle += ((RightTurnInstruction) instruction).getAngle();
         }
@@ -104,20 +106,18 @@ public class Turtle extends Sprite {
 
     public void home(Instruction instruction) {
         if (instruction instanceof HomeInstruction) {
-            System.out.println("Volviendo a posicion inicial");
-            this.x= initialX;
-            this.y= initialY;
+            this.x = initialX;
+            this.y = initialY;
             xPoints.add(x + width / 2);
             yPoints.add(y + height / 2);
         }
     }
 
-    public void reset(Instruction instruction){
-        System.out.println("Reiniciando");
-        if(instruction instanceof ResetInstruction){
+    public void reset(Instruction instruction) {
+        if (instruction instanceof ResetInstruction) {
             this.setX(initialX);
             this.setY(initialY);
-            this.angle=0;
+            this.angle = 0;
         }
     }
 
@@ -148,7 +148,7 @@ public class Turtle extends Sprite {
     @Override
     public void setX(int x) {
         this.x = x;
-        this.initialX= x;
+        this.initialX = x;
         this.xPoints = new LinkedList<>();
         this.xPoints.add(x + width / 2);
     }
@@ -156,7 +156,7 @@ public class Turtle extends Sprite {
     @Override
     public void setY(int y) {
         this.y = y;
-        this.initialY= y;
+        this.initialY = y;
         this.yPoints = new LinkedList<>();
         yPoints.add(y + height / 2);
     }

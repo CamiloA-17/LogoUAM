@@ -12,7 +12,7 @@ package co.autonoma.edu.game.exceptions;
 public class ParametersExceededException extends RuntimeException{
 
     public ParametersExceededException(String extraParameters) {
-        super("Los parametros [ " + extraParameters + "] estan sobrando");
+        super("Los parámetros [ " + extraParameters + "] no son necesarios");
     }
     
 }

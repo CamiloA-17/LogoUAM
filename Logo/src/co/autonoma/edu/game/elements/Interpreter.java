@@ -57,6 +57,7 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
             // writer.createFile(name, newInstruction);
         }
         turtle.handleInstruction(newInstruction);
+        updateList(instruction);
     }
 
     @Override
@@ -89,8 +90,8 @@ public class Interpreter extends Sprite implements Dimensionable, Drawable {
         return this.area.getObserver();
     }
     
-    public void updateList(Instruction instruction){
-        
+    public void updateList(String instruction){
+        fillable.updateList(instruction);
     }
     
     

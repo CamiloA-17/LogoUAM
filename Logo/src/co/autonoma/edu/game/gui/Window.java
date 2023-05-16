@@ -26,6 +26,7 @@ public class Window extends javax.swing.JFrame implements Dimensionable, Fillabl
     private final int PANEL_Y = 80;
     private final int PANEL_WIDTH = 800;
     private final int PANEL_HEIGHT = 500;
+    DefaultListModel<String> modelo;
 
     /**
      * Creates new form Window
@@ -38,6 +39,7 @@ public class Window extends javax.swing.JFrame implements Dimensionable, Fillabl
         turtleWindow = new TurtleWindow();
         turtleWindow.setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
         turtleWindow.setBorder(new BevelBorder(BevelBorder.RAISED));
+        modelo=new DefaultListModel<>();
         add(turtleWindow);
     }
 
@@ -143,7 +145,7 @@ public class Window extends javax.swing.JFrame implements Dimensionable, Fillabl
         } catch (VoidInstructionException e2) {
             JOptionPane.showMessageDialog(this, e2.getMessage());
         } catch (NumberFormatException e3) {
-            JOptionPane.showMessageDialog(this, e3.getMessage());
+            JOptionPane.showMessageDialog(this, "El parámetro debe ser un número");
         } catch (ParametersExceededException e4) {
             JOptionPane.showMessageDialog(this, e4.getMessage());
         } catch (NegativeDistanceException e5) {
@@ -179,7 +181,8 @@ public class Window extends javax.swing.JFrame implements Dimensionable, Fillabl
 
 
     @Override
-    public void updateList(DefaultListModel model) {
-        this.listInstructions.setModel(model);
+    public void updateList(String instruction) {
+       this.listInstructions.setModel(modelo);
+       this.modelo.addElement(instruction);
     }
 }

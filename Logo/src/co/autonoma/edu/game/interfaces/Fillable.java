@@ -4,12 +4,11 @@
  */
 package co.autonoma.edu.game.interfaces;
 
-import javax.swing.DefaultListModel;
 
 /**
  *
  * @author izibr
  */
 public interface Fillable {
-    public void updateList(DefaultListModel model);
+    public void updateList(String instructionl);
 }

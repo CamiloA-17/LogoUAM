@@ -11,7 +11,7 @@ package co.autonoma.edu.game.exceptions;
 public class NotAvailableInstructionException extends RuntimeException{
 
     public NotAvailableInstructionException(String instruction) {
-        super("La instruccion: " + instruction + " no es valida");
+        super("La instrucción: " + instruction + " no es válida");
     }
     
 }
