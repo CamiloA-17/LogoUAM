@@ -8,21 +8,20 @@ import java.awt.HeadlessException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import co.autonoma.edu.game.elements.Program;
+import co.autonoma.edu.game.instructions.Instruction;
 
 /**
  *
  * @author izibr
  */
-public class DocumentWriter extends JFrame{
+public class DocumentWriter extends JFrame{  
 
-    private File file;    
-    
     public DocumentWriter() throws HeadlessException {
-        this.file= file;
     }
     
     
@@ -38,21 +37,21 @@ public class DocumentWriter extends JFrame{
         return null;
     }
 
-    public void createFile(String fileName,ArrayList<String> Instructions) {
+    public void createFile(String fileName,Program instructions) {
         String filePath= selectPath()+fileName+".txt";
         File file = new File(filePath);
         try {
             file.createNewFile();
-            writeFile(Instructions, filePath);
+            writeFile(instructions, filePath);
             System.out.println("El archivo se ha creado con exito en: " + filePath);
         } catch (IOException e) {
             System.out.println("No se ha podido crear el archivo" + e.getMessage());
         }
     }
     
-    public void writeFile(ArrayList<String> instructions, String file) throws IOException {
+    public void writeFile(Program instructions, String file) throws IOException {
         try (FileWriter writer = new FileWriter(file)) {
-            for (String line : instructions) {
+            for (Instruction line : instructions.getInstructions()) {
                 writer.write(line + "\n");
             }
         }

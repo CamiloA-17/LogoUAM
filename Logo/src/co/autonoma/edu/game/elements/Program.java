@@ -39,16 +39,16 @@ public class Program {
             } else if (command.equals("H") || command.equals("HOME")) {
                 return addHomeInstruction(instruction);
             } else if (command.equals("L") || command.equals("LOAD")) {
-                
+                return addLoadInstruction(instruction);
             } else if (command.equals("S") || command.equals("SAVE")) {
-                
+                return addSaveInstruction(instruction);
             } else {
                 throw new NotAvailableInstructionException(instruction);
             }
         } else {
             throw new VoidInstructionException();
         }
-        return null;
+        // return null;
     }
     
     public Instruction addForwardInstruction(String instruction) throws NumberFormatException, NegativeDistanceException, PatternSyntaxException{
@@ -102,5 +102,23 @@ public class Program {
         newInstruction.setParameter(instruction);
         instructions.add(newInstruction);
         return newInstruction;
+    }
+
+    public Instruction addLoadInstruction(String instruction) throws ParametersExceededException{
+        Instruction newInstruction= new LoadInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+
+    public Instruction addSaveInstruction(String instruction) throws ParametersExceededException{
+        Instruction newInstruction= new SaveInstruction();
+        newInstruction.setParameter(instruction);
+        instructions.add(newInstruction);
+        return newInstruction;
+    }
+
+    public LinkedList<Instruction> getInstructions(){
+        return instructions;
     }
 }   
