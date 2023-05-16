@@ -103,4 +103,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,linux,macos
 /Logo/dist/
-/Logo/nbproject/private.xml
+/Logo/nbproject
